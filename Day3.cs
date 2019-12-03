@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace aoc2019
+{
+    internal class Day3 : Day
+    {
+        private readonly IEnumerable<(int, int)> intersections;
+        private readonly List<Dictionary<(int, int), int>> wires;
+
+        public Day3()
+        {
+            wires = File.ReadAllLines("input/day3.in").Select(line => ParseWire(line)).ToList();
+            intersections = wires[0].Keys.Intersect(wires[1].Keys);
+        }
+
+        public override void Part1()
+        {
+            Console.WriteLine(intersections.Min(x => Math.Abs(x.Item1) + Math.Abs(x.Item2)));
+        }
+
+        public override void Part2()
+        {
+            // add 2 to count (0, 0) on both lines
+            Console.WriteLine(intersections.Min(x => wires[0][x] + wires[1][x]) + 2);
+        }
+
+        private static Dictionary<(int, int), int> ParseWire(string line)
+        {
+            var r = new Dictionary<(int, int), int>();
+            int x = 0, y = 0, c = 0, i;
+
+            foreach (var step in line.Split(','))
+            {
+                var d = int.Parse(step.Substring(1));
+                switch (step[0])
+                {
+                    case 'U': for (i = 0; i < d; i++) r.TryAdd((x, ++y), c++); break;
+                    case 'D': for (i = 0; i < d; i++) r.TryAdd((x, --y), c++); break;
+                    case 'R': for (i = 0; i < d; i++) r.TryAdd((++x, y), c++); break;
+                    case 'L': for (i = 0; i < d; i++) r.TryAdd((--x, y), c++); break;
+                }
+            }
+
+            return r;
+        }
+    }
+}
