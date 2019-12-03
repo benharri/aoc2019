@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 
 namespace aoc2019
 {
@@ -8,11 +6,29 @@ namespace aoc2019
     {
         static void Main(string[] args)
         {
-            Day1.Part1();
-            Day1.Part2();
-
-            Day2.Part1();
-            Day2.Part2();
+            if (args.Length == 1 && int.TryParse(args[0], out int daynum))
+            {
+                if (daynum >= 0 && daynum <= 25)
+                {
+                    Day day = DayFactory.GetDay(daynum);
+                    day.AllParts();
+                }
+                else
+                {
+                    Console.WriteLine($"{daynum} is an invalid day");
+                    return;
+                }
+            }
+            else
+            {
+                for (var i = 1; i <= 25; ++i)
+                {
+                    var day = DayFactory.GetDay(i);
+                    if (day == null) continue;
+                    Console.WriteLine($"Day {i}:");
+                    day.AllParts();
+                }
+            }
         }
     }
 }

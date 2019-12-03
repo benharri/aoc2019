@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace aoc2019
 {
-    public class Day2
+    public class Day2 : Day
     {
-        private static IEnumerable<int> input = 
+        private static readonly IEnumerable<int> input =
             File.ReadLines("input/day2.in")
             .First()
             .Split(',')
@@ -23,7 +23,7 @@ namespace aoc2019
                 }
         }
 
-        public static void Part1()
+        public override void Part1()
         {
             var output = input.ToList();
             output[1] = 12;
@@ -34,7 +34,7 @@ namespace aoc2019
             Console.WriteLine($"{output[0]}");
         }
 
-        public static void Part2()
+        public override void Part2()
         {
             List<int> output;
 
