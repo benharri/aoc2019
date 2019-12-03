@@ -13,44 +13,19 @@ namespace aoc2019
             .Split(',')
             .Select(num => int.Parse(num));
 
-        private static bool debug = false;
-
-        public static void Log(string log)
+        public static void RunIntCode(ref List<int> v)
         {
-            if (debug)
-                Console.WriteLine(log);
-        }
-
-        public static void RunIntCode(ref List<int> output)
-        {
-            for (var i = 0; i < output.Count(); i++)
-            {
-                if (output[i] == 1)
+            for (var i = 0; v[i] != 99; i += 4)
+                switch (v[i])
                 {
-                    var val = output[output[i + 1]] + output[output[i + 2]];
-                    Log($"saving {val} to {output[i + 3]}");
-                    output[output[i + 3]] = val;
-                    i += 3;
+                    case 1: v[v[i + 3]] = v[v[i + 1]] + v[v[i + 2]]; break;
+                    case 2: v[v[i + 3]] = v[v[i + 1]] * v[v[i + 2]]; break;
                 }
-                else if (output[i] == 2)
-                {
-                    var val = output[output[i + 1]] * output[output[i + 2]];
-                    Log($"saving {val} to {output[i + 3]}");
-                    output[output[i + 3]] = val;
-                    i += 3;
-                }
-                else
-                {
-                    Log($"invalid operation: found {output[i]} at {i}");
-                    break;
-                }
-                Log(string.Join(',', output));
-            }
         }
 
         public static void Part1()
         {
-            List<int> output = input.ToList();
+            var output = input.ToList();
             output[1] = 12;
             output[2] = 2;
 
@@ -62,6 +37,7 @@ namespace aoc2019
         public static void Part2()
         {
             List<int> output;
+
             for (var i = 0; i < 100; i++)
             {
                 for (var j = 0; j < 100; j++)
@@ -75,6 +51,7 @@ namespace aoc2019
                     if (output[0] == 19690720)
                     {
                         Console.WriteLine($"{100 * i + j}");
+                        return;
                     }
                 }
             }
