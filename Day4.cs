@@ -22,32 +22,16 @@ namespace aoc2019
 
         private bool IsValid(int i)
         {
-            return Math.Floor(Math.Log10(i) + 1) == 6
-                && i >= start
-                && i <= end
-                && IsIncreasingDigits(i);
-        }
-
-        private bool IsIncreasingDigits(int i)
-        {
-            int prev = 0;
-            bool hasDup = false;
+            int prev = 0; bool hasDup = false;
             foreach (var c in i.ToString())
             {
                 int curr = c - '0';
-                if (curr < prev)
-                    return false;
-                if (curr == prev)
-                    hasDup = true;
+                if (curr < prev) return false;
+                if (curr == prev) hasDup = true;
                 prev = curr;
             }
-            return hasDup;
-        }
-
-        private bool Part2Criterion(int i)
-        {
-            var s = i.ToString();
-            return s.Select(c => s.Count(j => j == c)).Any(c => c == 2);
+            
+            return i >= start && i <= end && hasDup;
         }
 
         public override void Part1()
@@ -55,9 +39,16 @@ namespace aoc2019
             Console.WriteLine(Enumerable.Range(start, end).Count(i => IsValid(i)));
         }
 
+        private bool HasOnePair(int i)
+        {
+            var s = i.ToString();
+            return s.Select(c => s.Count(j => j == c)).Any(c => c == 2);
+        }
+
         public override void Part2()
         {
-            Console.WriteLine(Enumerable.Range(start,end).Count(i => IsValid(i) && Part2Criterion(i)));
+            Console.WriteLine(Enumerable.Range(start,end).Count(i => IsValid(i) && HasOnePair(i)));
         }
     }
 }
+
