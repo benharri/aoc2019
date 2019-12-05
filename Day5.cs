@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -9,11 +8,11 @@ namespace aoc2019
     {
         public override int DayNumber => 5;
 
-        private static readonly IEnumerable<int> tape =
+        private readonly IEnumerable<int> tape =
             File.ReadLines("input/day5.in").First().Split(',').Select(int.Parse);
 
-        private static int output;
-        public static void RunIntCode(List<int> v, int input)
+        private int output;
+        public void RunIntCode(List<int> v, int input)
         {
             var i = 0;
             while (i < v.Count && v[i] != 99)

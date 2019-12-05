@@ -8,7 +8,7 @@ namespace aoc2019
     {
         public override int DayNumber => 1;
 
-        private static readonly IEnumerable<int> masses =
+        private readonly IEnumerable<int> masses =
             File.ReadLines("input/day1.in").Select(int.Parse);
 
         private static int FuelCost(int weight) => weight / 3 - 2;

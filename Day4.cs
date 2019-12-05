@@ -32,20 +32,20 @@ namespace aoc2019
             return i >= start && i <= end && hasDup;
         }
 
-        public override string Part1()
-        {
-            return $"{Enumerable.Range(start, end).Count(IsValid)}";
-        }
-
         private bool HasOnePair(int i)
         {
             var s = i.ToString();
             return IsValid(i) && s.Select(c => s.Count(j => j == c)).Any(c => c == 2);
         }
 
+        public override string Part1()
+        {
+            return $"{Enumerable.Range(start, end).Count(IsValid)}";
+        }
+
         public override string Part2()
         {
-            return $"{Enumerable.Range(start,end).Count(HasOnePair)}";
+            return $"{Enumerable.Range(start, end).Count(HasOnePair)}";
         }
     }
 }
