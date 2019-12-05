@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 
 namespace aoc2019
 {
     internal class Day4 : Day
     {
-        int start, end;
+        public override int DayNumber => 4;
+
+        private readonly int start;
+        private readonly int end;
 
         public Day4()
         {
             var range = File.ReadLines("input/day4.in")
-                .First()
-                .Split('-')
-                .Select(i => int.Parse(i))
-                .ToList();
+                .First().Split('-').Select(int.Parse).ToList();
 
             start = range[0]; end = range[1];
         }
@@ -34,20 +32,20 @@ namespace aoc2019
             return i >= start && i <= end && hasDup;
         }
 
-        public override void Part1()
+        public override string Part1()
         {
-            Console.WriteLine(Enumerable.Range(start, end).Count(i => IsValid(i)));
+            return $"{Enumerable.Range(start, end).Count(IsValid)}";
         }
 
         private bool HasOnePair(int i)
         {
             var s = i.ToString();
-            return s.Select(c => s.Count(j => j == c)).Any(c => c == 2);
+            return IsValid(i) && s.Select(c => s.Count(j => j == c)).Any(c => c == 2);
         }
 
-        public override void Part2()
+        public override string Part2()
         {
-            Console.WriteLine(Enumerable.Range(start,end).Count(i => IsValid(i) && HasOnePair(i)));
+            return $"{Enumerable.Range(start,end).Count(HasOnePair)}";
         }
     }
 }

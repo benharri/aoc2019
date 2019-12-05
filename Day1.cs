@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,16 +6,12 @@ namespace aoc2019
 {
     public class Day1 : Day
     {
-        private static readonly IEnumerable<int> lines =
-            File.ReadLines("input/day1.in").Select(line => int.Parse(line));
+        public override int DayNumber => 1;
+
+        private static readonly IEnumerable<int> masses =
+            File.ReadLines("input/day1.in").Select(int.Parse);
 
         private static int FuelCost(int weight) => weight / 3 - 2;
-
-        public override void Part1()
-        {
-            Console.WriteLine(lines.Select(num => FuelCost(num)).Sum());
-        }
-
         private static int FullCost(int cost)
         {
             int total = 0, newcost, tmp = cost;
@@ -30,10 +25,8 @@ namespace aoc2019
             return total;
         }
 
-        public override void Part2()
-        {
-            Console.WriteLine(lines.Select(cost => FullCost(cost)).Sum());
-        }
+        public override string Part1() => $"{masses.Select(FuelCost).Sum()}";
+
+        public override string Part2() => $"{masses.Select(FullCost).Sum()}";
     }
 }
-

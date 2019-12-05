@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace aoc2019
 {
@@ -6,29 +9,28 @@ namespace aoc2019
     {
         static void Main(string[] args)
         {
+            var days = GetDays();
+
             if (args.Length == 1 && int.TryParse(args[0], out int daynum))
             {
-                if (daynum >= 0 && daynum <= 25)
-                {
-                    Day day = DayFactory.GetDay(daynum);
-                    day.AllParts();
-                }
+                var d = days.Where(d => d.DayNumber == daynum);
+                if (d.Any())
+                    d.First().AllParts();
                 else
-                {
-                    Console.WriteLine($"{daynum} is an invalid day");
-                    return;
-                }
+                    Console.WriteLine($"{daynum} invalid or not yet implemented");
             }
             else
             {
-                for (var i = 1; i <= 25; ++i)
+                foreach (var d in days)
                 {
-                    var day = DayFactory.GetDay(i);
-                    if (day == null) continue;
-                    Console.WriteLine($"Day {i}:");
-                    day.AllParts();
+                    d.AllParts();
                 }
             }
         }
+
+        private static IEnumerable<Day> GetDays() =>
+            Assembly.GetExecutingAssembly().GetTypes()
+                .Where(t => t.BaseType == typeof(Day))
+                .Select(t => (Day)Activator.CreateInstance(t));
     }
 }

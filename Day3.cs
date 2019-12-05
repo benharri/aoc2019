@@ -7,24 +7,26 @@ namespace aoc2019
 {
     internal class Day3 : Day
     {
+        public override int DayNumber => 3;
+
         private readonly IEnumerable<(int, int)> intersections;
         private readonly List<Dictionary<(int, int), int>> wires;
 
         public Day3()
         {
-            wires = File.ReadAllLines("input/day3.in").Select(line => ParseWire(line)).ToList();
+            wires = File.ReadAllLines("input/day3.in").Select(ParseWire).ToList();
             intersections = wires[0].Keys.Intersect(wires[1].Keys);
         }
 
-        public override void Part1()
+        public override string Part1()
         {
-            Console.WriteLine(intersections.Min(x => Math.Abs(x.Item1) + Math.Abs(x.Item2)));
+            return $"{intersections.Min(x => Math.Abs(x.Item1) + Math.Abs(x.Item2))}";
         }
 
-        public override void Part2()
+        public override string Part2()
         {
             // add 2 to count (0, 0) on both lines
-            Console.WriteLine(intersections.Min(x => wires[0][x] + wires[1][x]) + 2);
+            return $"{intersections.Min(x => wires[0][x] + wires[1][x]) + 2}";
         }
 
         private static Dictionary<(int, int), int> ParseWire(string line)
