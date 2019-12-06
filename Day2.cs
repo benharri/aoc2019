@@ -8,8 +8,11 @@ namespace aoc2019
     {
         public override int DayNumber => 2;
 
-        private readonly IEnumerable<int> input =
-            File.ReadLines("input/day2.in").First().Split(',').Select(int.Parse);
+        private readonly IEnumerable<int> input;
+        public Day2()
+        {
+            input = Input.First().Split(',').Select(int.Parse);
+        }
 
         public int RunIntCode(int noun, int verb)
         {

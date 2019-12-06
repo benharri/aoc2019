@@ -12,9 +12,7 @@ namespace aoc2019
 
         public Day4()
         {
-            var range = File.ReadLines("input/day4.in")
-                .First().Split('-').Select(int.Parse).ToList();
-
+            var range = Input.First().Split('-').Select(int.Parse).ToList();
             start = range[0]; end = range[1];
         }
 

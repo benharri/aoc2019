@@ -14,7 +14,7 @@ namespace aoc2019
 
         public Day3()
         {
-            wires = File.ReadAllLines("input/day3.in").Select(ParseWire).ToList();
+            wires = Input.Select(ParseWire).ToList();
             intersections = wires[0].Keys.Intersect(wires[1].Keys);
         }
 
