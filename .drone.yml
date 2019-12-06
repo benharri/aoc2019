@@ -2,10 +2,6 @@
 kind: pipeline
 name: run
 
-trigger:
-    branch:
-        - master
-
 steps:
     - name: run
       image: mcr.microsoft.com/dotnet/core/sdk:latest
