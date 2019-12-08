@@ -11,5 +11,16 @@ namespace aoc2019.lib
             if (list.Count() == 1) return new[] { list };
             return list.SelectMany(t => Permute(list.Where(x => !x.Equals(t))), (v, p) => p.Prepend(v));
         }
+
+        public static IEnumerable<string> Chunk(this string str, int chunkSize)
+        {
+            for (int i = 0; i < str.Length; i += chunkSize)
+                yield return str.Substring(i, chunkSize);
+        }
+
+        public static string ToDelimitedString<T>(this IEnumerable<T> enumerable, string delimiter = "")
+        {
+            return string.Join(delimiter, enumerable);
+        }
     }
 }
