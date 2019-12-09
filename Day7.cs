@@ -9,11 +9,11 @@ namespace aoc2019
     {
         public override int DayNumber => 7;
 
-        private readonly List<int> input;
+        private readonly List<long> input;
         private readonly IntCodeVM[] Amplifiers = new IntCodeVM[5];
         public Day7()
         {
-            input = Input.First().Split(',').Select(int.Parse).ToList();
+            input = Input.First().Split(',').Select(long.Parse).ToList();
             for (var i = 0; i < 5; i++) Amplifiers[i] = new IntCodeVM(input);
         }
 
@@ -21,7 +21,7 @@ namespace aoc2019
 
         public override string Part1()
         {
-            int i, largest = 0;
+            long i, largest = 0;
 
             foreach (var phaseSeq in Enumerable.Range(0, 5).Permute())
             {
@@ -42,7 +42,7 @@ namespace aoc2019
 
         public override string Part2()
         {
-            int i, largest = 0;
+            long i, largest = 0;
 
             foreach (var phaseSeq in Enumerable.Range(5, 5).Permute())
             {
