@@ -9,11 +9,10 @@ namespace aoc2019
     {
         public override int DayNumber => 7;
 
-        private readonly List<long> input;
         private readonly IntCodeVM[] Amplifiers = new IntCodeVM[5];
         public Day7()
         {
-            input = Input.First().Split(',').Select(long.Parse).ToList();
+            var input = Input.First().Split(',').Select(long.Parse);
             for (var i = 0; i < 5; i++) Amplifiers[i] = new IntCodeVM(input);
         }
 

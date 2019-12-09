@@ -12,7 +12,7 @@ namespace aoc2019
 
         public Day9()
         {
-            vm = new IntCodeVM(Input.First().Split(',').Select(long.Parse).ToList());
+            vm = new IntCodeVM(Input.First().Split(',').Select(long.Parse));
         }
 
         public override string Part1()

@@ -12,7 +12,7 @@ namespace aoc2019.lib
         private readonly long[] program;
         public Queue<long> input, output;
 
-        public IntCodeVM(List<long> tape)
+        public IntCodeVM(IEnumerable<long> tape)
         {
             i = 0;
             relbase = 0;
