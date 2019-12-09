@@ -12,8 +12,7 @@ namespace aoc2019
         private readonly IntCodeVM[] Amplifiers = new IntCodeVM[5];
         public Day7()
         {
-            var input = Input.First().Split(',').Select(long.Parse);
-            for (var i = 0; i < 5; i++) Amplifiers[i] = new IntCodeVM(input);
+            for (var i = 0; i < 5; i++) Amplifiers[i] = new IntCodeVM(Input.First());
         }
 
         
