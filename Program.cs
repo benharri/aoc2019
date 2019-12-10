@@ -31,6 +31,7 @@ namespace aoc2019
         private static IEnumerable<Day> GetDays() =>
             Assembly.GetExecutingAssembly().GetTypes()
                 .Where(t => t.BaseType == typeof(Day))
-                .Select(t => (Day)Activator.CreateInstance(t));
+                .Select(t => (Day)Activator.CreateInstance(t))
+                .OrderBy(d => d.DayNumber);
     }
 }
