@@ -51,7 +51,7 @@ namespace aoc2019
                 .Select(g => new { 
                     Angle = g.Key, 
                     Targets = new Queue<Point>(g.OrderBy(a => 
-                        Math.Sqrt(Math.Pow(a.X, 2) + Math.Pow(a.Y, 2))
+                        Math.Sqrt(Math.Pow(a.X - best.X, 2) + Math.Pow(a.Y - best.Y, 2))
                     ))
                 })
                 .OrderBy(g => g.Angle > Math.PI / 2)
