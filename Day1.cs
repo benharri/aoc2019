@@ -27,8 +27,8 @@ namespace aoc2019
             return total;
         }
 
-        public override string Part1() => $"{masses.Select(FuelCost).Sum()}";
+        public override string Part1() => $"{masses.Sum(FuelCost)}";
 
-        public override string Part2() => $"{masses.Select(FullCost).Sum()}";
+        public override string Part2() => $"{masses.Sum(FullCost)}";
     }
 }

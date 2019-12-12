@@ -109,40 +109,17 @@ namespace aoc2019
 
         public override string Part2()
         {
-            moons = startingPositions;
-            step = 0;
-            var seenX = new HashSet<string>();
-            var seenY = new HashSet<string>();
-            var seenZ = new HashSet<string>();
-            int repX = 0, repY = 0, repZ = 0;
+            int cycleX = 0, cycleY = 0, cycleZ = 0;
 
-            while (true)
-            {
-                if (repX != 0 && repY != 0 && repZ != 0) break;
+            while (cycleX == 0 || cycleY == 0 || cycleZ == 0) {
                 Step();
-
-                if (repX == 0)
-                {
-                    var xcoords = moons.Select(m => (m.x, m.dx)).ToDelimitedString();
-                    if (seenX.Contains(xcoords)) repX = step;
-                    seenX.Add(xcoords);
-                }
-                if (repY == 0)
-                {
-                    var ycoords = moons.Select(m => (m.y, m.dy)).ToDelimitedString();
-                    if (seenY.Contains(ycoords)) repY = step;
-                    seenY.Add(ycoords);
-                }
-                if (repZ == 0)
-                {
-                    var zcoords = moons.Select(m => (m.z, m.dz)).ToDelimitedString();
-                    if (seenZ.Contains(zcoords)) repZ = step;
-                    seenZ.Add(zcoords);
-                }
                 step++;
+                if (cycleX == 0 && moons.All(m => m.dx == 0)) cycleX = step * 2;
+                if (cycleY == 0 && moons.All(m => m.dy == 0)) cycleY = step * 2;
+                if (cycleZ == 0 && moons.All(m => m.dz == 0)) cycleZ = step * 2;
             }
 
-            return $"{LCM(repX, LCM(repY, repZ))}";
+            return $"{LCM(cycleX, LCM(cycleY, cycleZ))}";
         }
     }
 }
