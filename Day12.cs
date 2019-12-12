@@ -97,11 +97,13 @@ namespace aoc2019
 
             foreach (var moon in moons)
                 moon.Move();
+
+            step++;
         }
 
         public override string Part1()
         {
-            for (step = 0; step < 1000; step++)
+            while (step < 1000)
                 Step();
 
             return $"{moons.Sum(p => p.TotalEnergy)}";
@@ -113,7 +115,6 @@ namespace aoc2019
 
             while (cycleX == 0 || cycleY == 0 || cycleZ == 0) {
                 Step();
-                step++;
                 if (cycleX == 0 && moons.All(m => m.dx == 0)) cycleX = step * 2;
                 if (cycleY == 0 && moons.All(m => m.dy == 0)) cycleY = step * 2;
                 if (cycleZ == 0 && moons.All(m => m.dz == 0)) cycleZ = step * 2;
