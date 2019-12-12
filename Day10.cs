@@ -1,6 +1,6 @@
+using aoc2019.lib;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 
 namespace aoc2019
@@ -9,66 +9,65 @@ namespace aoc2019
     {
         public override int DayNumber => 10;
 
-        private readonly List<Point> asteroids = new List<Point>();
-        private Point best = new Point(-1, -1);
-        private IGrouping<double, Point>[] bestgroups;
+        private readonly HashSet<(int x, int y)> asteroids = new HashSet<(int x, int y)>();
+        private (int x, int y) best = (x: -1, y: -1);
         private int bestcansee;
 
         public Day10()
         {
-            var starmap = Input.Select(x => x.Select(y => y == '#').ToArray()).ToArray();
+            asteroids = Input
+                .Select((r, y) => r.Select((c, x) => (x, y, isAsteroid: c == '#')).ToArray())
+                .SelectMany(r => r)
+                .Where(a => a.isAsteroid)
+                .Select(a => (a.x, a.y))
+                .ToHashSet();
+        }
 
-            for (var i = 0; i < starmap.Length; i++)
-                for (var j = 0; j < starmap[i].Length; j++)
-                    if (starmap[i][j])
-                        asteroids.Add(new Point(i, j));
-
+        public override string Part1()
+        {
             foreach (var asteroid in asteroids)
             {
-                var groups = asteroids.Except(new[] { asteroid })
-                    .Select(a => new Point(a.X - asteroid.X, a.Y - asteroid.Y))
-                    .GroupBy(a => Math.Atan2(a.Y, a.X))
-                    .ToArray();
-                var cansee = groups.Count();
+                var cansee = asteroids
+                    .Except(new[] { asteroid })
+                    .Select(a => (x: a.x - asteroid.x, y: a.y - asteroid.y))
+                    .GroupBy(a => Math.Atan2(a.y, a.x))
+                    .Count();
 
                 if (cansee > bestcansee)
                 {
                     best = asteroid;
                     bestcansee = cansee;
-                    bestgroups = groups;
                 }
             }
-        }
-
-        public override string Part1()
-        {
             return $"{bestcansee}";
         }
 
         public override string Part2()
         {
-            var removals = bestgroups
-                .Select(g => new { 
-                    Angle = g.Key, 
-                    Targets = new Queue<Point>(g.OrderBy(a => 
-                        Math.Sqrt(Math.Pow(a.X - best.X, 2) + Math.Pow(a.Y - best.Y, 2))
-                    ))
-                })
-                .OrderBy(g => g.Angle > Math.PI / 2)
-                .ThenByDescending(g => g.Angle);
+            static IEnumerable<(int x, int y, double angle, double dist)> GetValue(Queue<(int x, int y, double angle, double dist)> q)
+            {
+                if (q.Count > 0) yield return q.Dequeue();
+            }
 
-            var removed = 0;
-            while (true)
-                foreach (var removal in removals)
-                    if (removal.Targets.Count > 0)
-                    {
-                        var toremove = removal.Targets.Dequeue();
-                        removed++;
-                        if (removed == 200)
-                        {
-                            return $"{(toremove.X * 100) + toremove.Y}";
-                        }
-                    }
+            return asteroids
+                .Where(a => a != best)
+                .Select(a =>
+                {
+                    var xdist = a.x - best.x;
+                    var ydist = a.y - best.y;
+                    var angle = Math.Atan2(xdist, ydist);
+                    return (a.x, a.y, angle, dist: Math.Sqrt(xdist * xdist + ydist * ydist));
+                })
+                .ToLookup(a => a.angle)
+                .OrderByDescending(a => a.Key)
+                .Select(a => new Queue<(int x, int y, double angle, double dist)>(a.OrderBy(b => b.dist)))
+                .Repeat()
+                .SelectMany(GetValue)
+                .Skip(199)
+                .Take(1)
+                .Select(a => a.x * 100 + a.y)
+                .Single()
+                .ToString();
         }
     }
 }

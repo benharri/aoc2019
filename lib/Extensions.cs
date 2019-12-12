@@ -22,5 +22,12 @@ namespace aoc2019.lib
         {
             return string.Join(delimiter, enumerable);
         }
+
+        public static IEnumerable<T> Repeat<T>(this IEnumerable<T> sequence, int? count = null)
+        {
+            while (count == null || count-- > 0)
+                foreach (var item in sequence)
+                    yield return item;
+        }
     }
 }
