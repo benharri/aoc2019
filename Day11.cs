@@ -1,8 +1,9 @@
 using aoc2019.lib;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace aoc2019
 {
@@ -10,17 +11,13 @@ namespace aoc2019
     {
         public override int DayNumber => 11;
 
-        private IntCodeVM vm;
-        List<List<bool>> paintmap;
-        long x, y;
-        Direction heading;
+        private readonly IntCodeVM vm;
+        private long x, y;
+        private Direction heading;
 
         public Day11()
         {
             vm = new IntCodeVM(Input.First());
-            paintmap = new List<List<bool>>();
-            x = 0; y = 0;
-            heading = Direction.Up;
         }
 
         enum Direction
@@ -28,14 +25,14 @@ namespace aoc2019
             Up, Down, Left, Right
         }
 
-        private (long, long) DxDy()
+        private void Move()
         {
-            return heading switch
+            switch (heading)
             {
-                Direction.Up => (0, 1),
-                Direction.Down => (0, -1),
-                Direction.Left => (-1, 0),
-                Direction.Right => (1, 0)
+                case Direction.Up: y++; break;
+                case Direction.Down: y--; break;
+                case Direction.Left: x--; break;
+                case Direction.Right: x++; break;
             };
         }
 
@@ -43,33 +40,54 @@ namespace aoc2019
         {
             switch (heading)
             {
-                case Direction.Up:    heading = direction == 0 ? Direction.Left : Direction.Right; break;
-                case Direction.Down:  heading = direction == 0 ? Direction.Right : Direction.Left; break;
-                case Direction.Left:  heading = direction == 0 ? Direction.Down : Direction.Up; break;
+                case Direction.Up: heading = direction == 0 ? Direction.Left : Direction.Right; break;
+                case Direction.Down: heading = direction == 0 ? Direction.Right : Direction.Left; break;
+                case Direction.Left: heading = direction == 0 ? Direction.Down : Direction.Up; break;
                 case Direction.Right: heading = direction == 0 ? Direction.Up : Direction.Down; break;
             }
+            Move();
+        }
+
+        private Dictionary<(long x, long y), long> PaintShip(int initialVal)
+        {
+            var map = new Dictionary<(long, long), long>();
+            vm.Reset();
+            heading = Direction.Up;
+            x = 0; y = 0;
+            map[(x, y)] = initialVal;
+
+            var haltType = IntCodeVM.HaltType.Waiting;
+            while (haltType == IntCodeVM.HaltType.Waiting)
+            {
+                haltType = vm.Run(map.GetValueOrDefault((x, y)));
+                map[(x, y)] = vm.Result;
+                Turn(vm.Result);
+            }
+
+            return map;
         }
 
         public override string Part1()
         {
-            vm.Reset();
-            vm.Run();
-            var output = vm.output.ToList();
-            long dx, dy;
-            for (var i = 0; i < output.Count; i += 2)
-            {
-                long color = output[i];
-                Turn(output[i + 1]);
-                paintmap[x][y] = color == 0;
-                (dx, dy) = DxDy();
-                x += dx; y += dy;
-            }
-            return $"{paintmap.Count(x => x != null)}";
+            return $"{PaintShip(0).Count}";
         }
 
         public override string Part2()
         {
-            return "";
+            var map = PaintShip(1);
+            int minX = (int)map.Keys.Select(x => x.x).Min();
+            int maxX = (int)map.Keys.Select(x => x.x).Max();
+            int minY = (int)map.Keys.Select(x => x.y).Min();
+            int maxY = (int)map.Keys.Select(x => x.y).Max();
+
+            return Enumerable.Range(minY, maxY - minY + 1)
+                .Select(y =>
+                    Enumerable.Range(minX, maxX - minX + 1)
+                    .Select(x => map.GetValueOrDefault((x, y)) == 0 ? ' ' : '#')
+                    .ToDelimitedString()
+                )
+                .Reverse()
+                .ToDelimitedString(Environment.NewLine);
         }
     }
 }
