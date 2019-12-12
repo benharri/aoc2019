@@ -1,5 +1,4 @@
 using aoc2019.lib;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
