@@ -47,7 +47,7 @@ namespace aoc2019
                 foreach (var (vm, phase) in Amplifiers.Zip(phaseSeq))
                 {
                     vm.Reset();
-                    vm.input.Enqueue(phase);
+                    vm.AddInput(phase);
                 }
 
                 var vms = new Queue<IntCodeVM>(Amplifiers);

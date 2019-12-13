@@ -39,6 +39,11 @@ namespace aoc2019.lib
 
         public long Result => output.Dequeue();
 
+        public void AddInput(long value)
+        {
+            input.Enqueue(value);
+        }
+
         private long MemGet(long addr)
         {
             return addr < memory.Length ? memory[addr] : 0;
@@ -86,7 +91,7 @@ namespace aoc2019.lib
 
         public HaltType Run(params long[] additionalInput)
         {
-            foreach (var s in additionalInput) input.Enqueue(s);
+            foreach (var s in additionalInput) AddInput(s);
             return Run();
         }
         public HaltType Run()
