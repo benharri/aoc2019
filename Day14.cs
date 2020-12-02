@@ -24,7 +24,7 @@ namespace aoc2019
             if (quantity <= 0)
                 throw new ArgumentOutOfRangeException(nameof(quantity));
 
-            if (!available!.ContainsKey(chem))
+            if (!available.ContainsKey(chem))
                 available[chem] = 0;
 
             if (available[chem] < quantity && !Produce(chem, quantity - available[chem]))
@@ -46,7 +46,7 @@ namespace aoc2019
                 if (!Consume(reactant.Name, reactionCount * reactant.Quantity))
                     return false;
 
-            available![chem] = available.GetValueOrDefault(chem) + reactionCount * reaction.product.Quantity;
+            available[chem] = available.GetValueOrDefault(chem) + reactionCount * reaction.product.Quantity;
             return true;
         }
 
@@ -68,7 +68,7 @@ namespace aoc2019
             {
             }
 
-            return $"{available["FUEL"]}";
+            return $"{available["FUEL"] + 1}";
         }
 
         private struct Component
