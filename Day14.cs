@@ -6,48 +6,18 @@ namespace aoc2019
 {
     internal sealed class Day14 : Day
     {
-        public override int DayNumber => 14;
-
-        private Dictionary<string, long> available;
         private readonly Dictionary<string, Reaction> reactions;
 
-        private struct Component
+        private Dictionary<string, long> available;
+
+        public Day14()
         {
-            public string Name { get; set; }
-            public int Quantity { get; set; }
+            reactions = Input
+                .Select(Reaction.Parse)
+                .ToDictionary(r => r.product.Name);
         }
 
-        private class Reaction
-        {
-            public readonly Component product;
-            public readonly Component[] reactants;
-
-            private Reaction(Component[] reactants, Component product)
-            {
-                this.reactants = reactants;
-                this.product = product;
-            }
-
-            public static Reaction Parse(string s)
-            {
-                var ss = s.Split(new[] { ", ", " => " }, System.StringSplitOptions.None);
-
-                return new Reaction(
-                    ss.Take(ss.Length - 1).Select(ParseComponent).ToArray(),
-                    ParseComponent(ss[^1])
-                );
-
-                static Component ParseComponent(string s)
-                {
-                    var spl = s.Split(' ', 2);
-                    return new Component
-                    {
-                        Quantity = int.Parse(spl[0]),
-                        Name = spl[1]
-                    };
-                }
-            }
-        }
+        public override int DayNumber => 14;
 
         private bool Consume(string chem, long quantity)
         {
@@ -70,7 +40,7 @@ namespace aoc2019
                 return false;
 
             var reaction = reactions[chem];
-            var reactionCount = (long)Math.Ceiling((double)quantity / reaction.product.Quantity);
+            var reactionCount = (long) Math.Ceiling((double) quantity / reaction.product.Quantity);
 
             foreach (var reactant in reaction.reactants)
                 if (!Consume(reactant.Name, reactionCount * reactant.Quantity))
@@ -80,23 +50,56 @@ namespace aoc2019
             return true;
         }
 
-        public Day14()
-        {
-            reactions = Input
-                .Select(Reaction.Parse)
-                .ToDictionary(r => r.product.Name);
-        }
-
         public override string Part1()
         {
-            available = new Dictionary<string, long> { { "ORE", long.MaxValue } };
+            available = new Dictionary<string, long> {{"ORE", long.MaxValue}};
             Consume("FUEL", 1);
             return $"{long.MaxValue - available["ORE"]}";
         }
 
         public override string Part2()
         {
+            available = new Dictionary<string, long> {{"ORE", 1000000000000}};
+            Consume("FUEL", long.MaxValue);
             return "";
+        }
+
+        private struct Component
+        {
+            public string Name { get; set; }
+            public int Quantity { get; set; }
+        }
+
+        private class Reaction
+        {
+            public readonly Component product;
+            public readonly Component[] reactants;
+
+            private Reaction(Component[] reactants, Component product)
+            {
+                this.reactants = reactants;
+                this.product = product;
+            }
+
+            public static Reaction Parse(string s)
+            {
+                var ss = s.Split(new[] {", ", " => "}, StringSplitOptions.None);
+
+                return new Reaction(
+                    ss.Take(ss.Length - 1).Select(ParseComponent).ToArray(),
+                    ParseComponent(ss[^1])
+                );
+
+                static Component ParseComponent(string s)
+                {
+                    var spl = s.Split(' ', 2);
+                    return new Component
+                    {
+                        Quantity = int.Parse(spl[0]),
+                        Name = spl[1]
+                    };
+                }
+            }
         }
     }
 }

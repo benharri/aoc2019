@@ -1,20 +1,20 @@
-using aoc2019.lib;
 using System.Collections.Generic;
 using System.Linq;
+using aoc2019.lib;
 
 namespace aoc2019
 {
     internal sealed class Day7 : Day
     {
-        public override int DayNumber => 7;
-
         private readonly IntCodeVM[] Amplifiers = new IntCodeVM[5];
+
         public Day7()
         {
             for (var i = 0; i < 5; i++) Amplifiers[i] = new IntCodeVM(Input.First());
         }
 
-        
+        public override int DayNumber => 7;
+
 
         public override string Part1()
         {

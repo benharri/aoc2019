@@ -1,17 +1,18 @@
-using aoc2019.lib;
 using System.Linq;
+using aoc2019.lib;
 
 namespace aoc2019
 {
     internal sealed class Day9 : Day
     {
-        public override int DayNumber => 9;
         private readonly IntCodeVM vm;
 
         public Day9()
         {
             vm = new IntCodeVM(Input.First());
         }
+
+        public override int DayNumber => 9;
 
         public override string Part1()
         {

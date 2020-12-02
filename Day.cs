@@ -8,6 +8,7 @@ namespace aoc2019
     public abstract class Day
     {
         public abstract int DayNumber { get; }
+
         public virtual IEnumerable<string> Input =>
             File.ReadLines($"input/day{DayNumber}.in");
 

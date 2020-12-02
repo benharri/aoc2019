@@ -4,28 +4,31 @@ namespace aoc2019
 {
     internal sealed class Day4 : Day
     {
-        public override int DayNumber => 4;
+        private readonly int end;
 
         private readonly int start;
-        private readonly int end;
 
         public Day4()
         {
             var range = Input.First().Split('-').Select(int.Parse).ToList();
-            start = range[0]; end = range[1];
+            start = range[0];
+            end = range[1];
         }
+
+        public override int DayNumber => 4;
 
         private bool IsValid(int i)
         {
-            int prev = 0; bool hasDup = false;
+            var prev = 0;
+            var hasDup = false;
             foreach (var c in i.ToString())
             {
-                int curr = c - '0';
+                var curr = c - '0';
                 if (curr < prev) return false;
                 if (curr == prev) hasDup = true;
                 prev = curr;
             }
-            
+
             return i >= start && i <= end && hasDup;
         }
 
@@ -46,4 +49,3 @@ namespace aoc2019
         }
     }
 }
-

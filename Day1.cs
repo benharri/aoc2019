@@ -5,15 +5,20 @@ namespace aoc2019
 {
     internal sealed class Day1 : Day
     {
-        public override int DayNumber => 1;
-
         private readonly IEnumerable<int> masses;
+
         public Day1()
         {
             masses = Input.Select(int.Parse);
         }
 
-        private static int FuelCost(int weight) => weight / 3 - 2;
+        public override int DayNumber => 1;
+
+        private static int FuelCost(int weight)
+        {
+            return weight / 3 - 2;
+        }
+
         private static int FullCost(int cost)
         {
             int total = 0, newcost, tmp = cost;
@@ -27,8 +32,14 @@ namespace aoc2019
             return total;
         }
 
-        public override string Part1() => $"{masses.Sum(FuelCost)}";
+        public override string Part1()
+        {
+            return $"{masses.Sum(FuelCost)}";
+        }
 
-        public override string Part2() => $"{masses.Sum(FullCost)}";
+        public override string Part2()
+        {
+            return $"{masses.Sum(FullCost)}";
+        }
     }
 }

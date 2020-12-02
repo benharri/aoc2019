@@ -5,18 +5,20 @@ namespace aoc2019
 {
     internal sealed class Day2 : Day
     {
-        public override int DayNumber => 2;
-
         private readonly IEnumerable<int> input;
+
         public Day2()
         {
             input = Input.First().Split(',').Select(int.Parse);
         }
 
+        public override int DayNumber => 2;
+
         public int RunIntCode(int noun, int verb)
         {
             var v = input.ToList();
-            v[1] = noun; v[2] = verb;
+            v[1] = noun;
+            v[2] = verb;
 
             for (var i = 0; v[i] != 99; i += 4)
                 v[v[i + 3]] = v[i] switch
@@ -36,12 +38,11 @@ namespace aoc2019
         public override string Part2()
         {
             for (var i = 0; i < 100; i++)
-                for (var j = 0; j < 100; j++)
-                    if (RunIntCode(i, j) == 19690720)
-                        return $"{100 * i + j}";
+            for (var j = 0; j < 100; j++)
+                if (RunIntCode(i, j) == 19690720)
+                    return $"{100 * i + j}";
 
             return string.Empty;
         }
     }
 }
-

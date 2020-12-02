@@ -6,8 +6,6 @@ namespace aoc2019
 {
     internal sealed class Day3 : Day
     {
-        public override int DayNumber => 3;
-
         private readonly IEnumerable<(int, int)> intersections;
         private readonly List<Dictionary<(int, int), int>> wires;
 
@@ -16,6 +14,8 @@ namespace aoc2019
             wires = Input.Select(ParseWire).ToList();
             intersections = wires[0].Keys.Intersect(wires[1].Keys);
         }
+
+        public override int DayNumber => 3;
 
         public override string Part1()
         {
@@ -38,10 +38,18 @@ namespace aoc2019
                 var d = int.Parse(step.Substring(1));
                 switch (step[0])
                 {
-                    case 'U': for (i = 0; i < d; i++) r.TryAdd((x, ++y), c++); break;
-                    case 'D': for (i = 0; i < d; i++) r.TryAdd((x, --y), c++); break;
-                    case 'R': for (i = 0; i < d; i++) r.TryAdd((++x, y), c++); break;
-                    case 'L': for (i = 0; i < d; i++) r.TryAdd((--x, y), c++); break;
+                    case 'U':
+                        for (i = 0; i < d; i++) r.TryAdd((x, ++y), c++);
+                        break;
+                    case 'D':
+                        for (i = 0; i < d; i++) r.TryAdd((x, --y), c++);
+                        break;
+                    case 'R':
+                        for (i = 0; i < d; i++) r.TryAdd((++x, y), c++);
+                        break;
+                    case 'L':
+                        for (i = 0; i < d; i++) r.TryAdd((--x, y), c++);
+                        break;
                 }
             }
 

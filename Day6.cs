@@ -5,13 +5,14 @@ namespace aoc2019
 {
     internal sealed class Day6 : Day
     {
-        public override int DayNumber => 6;
-
         private readonly Dictionary<string, string> input;
+
         public Day6()
         {
             input = Input.ToDictionary(i => i.Split(')')[1], i => i.Split(')')[0]);
         }
+
+        public override int DayNumber => 6;
 
         private List<string> GetParents(string obj)
         {
@@ -29,10 +30,10 @@ namespace aoc2019
 
         public override string Part2()
         {
-            List<string> you = GetParents("YOU");
-            List<string> san = GetParents("SAN");
-            int common = 1;
-            for (; you[^common] == san[^common]; common++);
+            var you = GetParents("YOU");
+            var san = GetParents("SAN");
+            var common = 1;
+            for (; you[^common] == san[^common]; common++) ;
             return $"{you.Count + san.Count - common * 2}";
         }
     }

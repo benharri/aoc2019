@@ -5,22 +5,26 @@ namespace aoc2019
 {
     internal sealed class Day5 : Day
     {
-        public override int DayNumber => 5;
-
         private readonly IEnumerable<int> tape;
+
+        private int output;
+
         public Day5()
         {
             tape = Input.First().Split(',').Select(int.Parse);
         }
 
-        private int output;
+        public override int DayNumber => 5;
+
         public void RunIntCode(List<int> v, int input)
         {
             var i = 0;
             while (i < v.Count && v[i] != 99)
             {
-                int Val(int mode, int val) =>
-                    mode != 0 ? val : v[val];
+                int Val(int mode, int val)
+                {
+                    return mode != 0 ? val : v[val];
+                }
 
                 var mode1 = v[i] / 100 % 10;
                 var mode2 = v[i] / 1000;
@@ -60,6 +64,7 @@ namespace aoc2019
                 }
             }
         }
+
         public override string Part1()
         {
             RunIntCode(tape.ToList(), 1);

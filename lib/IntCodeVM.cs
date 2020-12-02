@@ -6,11 +6,17 @@ namespace aoc2019.lib
 {
     public class IntCodeVM
     {
-        private long i;
-        private long relbase;
-        public long[] memory;
+        public enum HaltType
+        {
+            Terminate,
+            Waiting
+        }
+
         private readonly long[] program;
+        private long i;
         public Queue<long> input, output;
+        public long[] memory;
+        private long relbase;
 
         public IntCodeVM(string tape)
         {
@@ -22,11 +28,7 @@ namespace aoc2019.lib
             output = new Queue<long>();
         }
 
-        public enum HaltType
-        {
-            Terminate,
-            Waiting
-        }
+        public long Result => output.Dequeue();
 
         public void Reset()
         {
@@ -36,8 +38,6 @@ namespace aoc2019.lib
             input.Clear();
             output.Clear();
         }
-
-        public long Result => output.Dequeue();
 
         public void AddInput(long value)
         {
@@ -53,7 +53,7 @@ namespace aoc2019.lib
         {
             if (addr < 0) addr = 0;
             if (addr >= memory.Length)
-                Array.Resize(ref memory, (int)addr + 1);
+                Array.Resize(ref memory, (int) addr + 1);
             memory[addr] = value;
         }
 
@@ -82,9 +82,13 @@ namespace aoc2019.lib
             var param = MemGet(i + idx);
             switch (Mode(idx))
             {
-                case 0: MemSet(param, val); break;
+                case 0:
+                    MemSet(param, val);
+                    break;
                 case 1: throw new Exception("cannot set in immediate mode");
-                case 2: MemSet(relbase + param, val); break;
+                case 2:
+                    MemSet(relbase + param, val);
+                    break;
                 default: throw new Exception("invalid parameter mode");
             }
         }
@@ -94,6 +98,7 @@ namespace aoc2019.lib
             foreach (var s in additionalInput) AddInput(s);
             return Run();
         }
+
         public HaltType Run()
         {
             while (i < memory.Length)
@@ -103,18 +108,22 @@ namespace aoc2019.lib
                 {
                     case 1:
                         Set(3, Get(1) + Get(2));
-                        i += 4; break;
+                        i += 4;
+                        break;
                     case 2:
                         Set(3, Get(1) * Get(2));
-                        i += 4; break;
+                        i += 4;
+                        break;
                     case 3:
                         if (!input.Any())
                             return HaltType.Waiting;
                         Set(1, input.Dequeue());
-                        i += 2; break;
+                        i += 2;
+                        break;
                     case 4:
                         output.Enqueue(Get(1));
-                        i += 2; break;
+                        i += 2;
+                        break;
                     case 5:
                         i = Get(1) == 0 ? i + 3 : Get(2);
                         break;
@@ -123,13 +132,16 @@ namespace aoc2019.lib
                         break;
                     case 7:
                         Set(3, Get(1) < Get(2) ? 1 : 0);
-                        i += 4; break;
+                        i += 4;
+                        break;
                     case 8:
                         Set(3, Get(1) == Get(2) ? 1 : 0);
-                        i += 4; break;
+                        i += 4;
+                        break;
                     case 9:
                         relbase += Get(1);
-                        i += 2; break;
+                        i += 2;
+                        break;
                     case 99:
                         return HaltType.Terminate;
                     default:

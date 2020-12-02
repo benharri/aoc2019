@@ -1,19 +1,20 @@
-using aoc2019.lib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using aoc2019.lib;
 
 namespace aoc2019
 {
     internal sealed class Day8 : Day
     {
-        public override int DayNumber => 8;
-
         private readonly List<List<char>> photo;
+
         public Day8()
         {
             photo = Input.First().Chunk(25 * 6).Select(s => s.ToList()).ToList();
         }
+
+        public override int DayNumber => 8;
 
         public override string Part1()
         {

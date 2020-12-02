@@ -1,16 +1,15 @@
-using aoc2019.lib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using aoc2019.lib;
 
 namespace aoc2019
 {
     internal sealed class Day13 : Day
     {
-        public override int DayNumber => 13;
+        private readonly Dictionary<(int x, int y), int> board;
 
         private readonly IntCodeVM vm;
-        private readonly Dictionary<(int x, int y), int> board;
 
         public Day13()
         {
@@ -18,9 +17,11 @@ namespace aoc2019
             board = new Dictionary<(int, int), int>();
         }
 
+        public override int DayNumber => 13;
+
         private void UpdateTiles(IEnumerable<long> queue)
         {
-            var input = queue.Select(i => (int)i).ToList();
+            var input = queue.Select(i => (int) i).ToList();
 
             for (var i = 0; i < input.Count - 2; i += 3)
             {
@@ -33,7 +34,6 @@ namespace aoc2019
                 else
                     board.Add((x, y), val);
             }
-
         }
 
         private void PrintBoard()
