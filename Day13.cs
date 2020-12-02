@@ -55,14 +55,14 @@ namespace aoc2019
             }
         }
 
-        public override string Part1()
+        protected override string Part1()
         {
             vm.Reset();
             vm.Run();
             return $"{vm.output.Where((v, i) => (i + 1) % 3 == 0 && v == 2).Count()}";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             vm.Reset();
             vm.memory[0] = 2;

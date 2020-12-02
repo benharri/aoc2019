@@ -23,7 +23,7 @@ namespace aoc2019
 
         public override int DayNumber => 10;
 
-        public override string Part1()
+        protected override string Part1()
         {
             foreach (var asteroid in asteroids)
             {
@@ -43,7 +43,7 @@ namespace aoc2019
             return $"{bestcansee}";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             static IEnumerable<(int x, int y, double angle, double dist)> GetValue(
                 Queue<(int x, int y, double angle, double dist)> q)

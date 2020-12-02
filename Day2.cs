@@ -30,12 +30,12 @@ namespace aoc2019
             return v[0];
         }
 
-        public override string Part1()
+        protected override string Part1()
         {
             return $"{RunIntCode(12, 2)}";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             for (var i = 0; i < 100; i++)
             for (var j = 0; j < 100; j++)

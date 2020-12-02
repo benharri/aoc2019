@@ -16,7 +16,7 @@ namespace aoc2019
         public override int DayNumber => 7;
 
 
-        public override string Part1()
+        protected override string Part1()
         {
             long i, largest = 0;
 
@@ -37,7 +37,7 @@ namespace aoc2019
             return $"{largest}";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             long i, largest = 0;
 

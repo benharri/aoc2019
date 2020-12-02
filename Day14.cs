@@ -50,14 +50,14 @@ namespace aoc2019
             return true;
         }
 
-        public override string Part1()
+        protected override string Part1()
         {
             available = new Dictionary<string, long> {{"ORE", long.MaxValue}};
             Consume("FUEL", 1);
             return $"{long.MaxValue - available["ORE"]}";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             const long capacity = 1_000_000_000_000;
             available = new Dictionary<string, long> {{"ORE", capacity}};

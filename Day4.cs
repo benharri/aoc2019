@@ -38,12 +38,12 @@ namespace aoc2019
             return IsValid(i) && s.Select(c => s.Count(j => j == c)).Any(c => c == 2);
         }
 
-        public override string Part1()
+        protected override string Part1()
         {
             return $"{Enumerable.Range(start, end).Count(IsValid)}";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             return $"{Enumerable.Range(start, end).Count(HasOnePair)}";
         }

@@ -14,12 +14,12 @@ namespace aoc2019
 
         public override int DayNumber => 15;
 
-        public override string Part1()
+        protected override string Part1()
         {
             return "intcode solution";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             return "";
         }

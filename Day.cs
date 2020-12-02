@@ -9,7 +9,7 @@ namespace aoc2019
     {
         public abstract int DayNumber { get; }
 
-        public virtual IEnumerable<string> Input =>
+        protected virtual IEnumerable<string> Input =>
             File.ReadLines($"input/day{DayNumber}.in");
 
         public virtual void AllParts(bool verbose = false)
@@ -31,7 +31,7 @@ namespace aoc2019
             Console.WriteLine();
         }
 
-        public abstract string Part1();
-        public abstract string Part2();
+        protected abstract string Part1();
+        protected abstract string Part2();
     }
 }

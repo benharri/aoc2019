@@ -17,12 +17,12 @@ namespace aoc2019
 
         public override int DayNumber => 3;
 
-        public override string Part1()
+        protected override string Part1()
         {
             return $"{intersections.Min(x => Math.Abs(x.Item1) + Math.Abs(x.Item2))}";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             // add 2 to count (0, 0) on both lines
             return $"{intersections.Min(x => wires[0][x] + wires[1][x]) + 2}";

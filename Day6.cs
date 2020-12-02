@@ -23,12 +23,12 @@ namespace aoc2019
             return res;
         }
 
-        public override string Part1()
+        protected override string Part1()
         {
             return $"{input.Keys.Sum(o => GetParents(o).Count - 1)}";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             var you = GetParents("YOU");
             var san = GetParents("SAN");

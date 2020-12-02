@@ -53,7 +53,7 @@ namespace aoc2019
             step++;
         }
 
-        public override string Part1()
+        protected override string Part1()
         {
             while (step < 1000)
                 Step();
@@ -61,7 +61,7 @@ namespace aoc2019
             return $"{moons.Sum(p => p.TotalEnergy)}";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             int cycleX = 0, cycleY = 0, cycleZ = 0;
 

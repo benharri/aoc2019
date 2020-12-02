@@ -65,13 +65,13 @@ namespace aoc2019
             }
         }
 
-        public override string Part1()
+        protected override string Part1()
         {
             RunIntCode(tape.ToList(), 1);
             return $"{output}";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             RunIntCode(tape.ToList(), 5);
             return $"{output}";

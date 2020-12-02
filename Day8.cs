@@ -16,13 +16,13 @@ namespace aoc2019
 
         public override int DayNumber => 8;
 
-        public override string Part1()
+        protected override string Part1()
         {
             var l = photo.OrderBy(layer => layer.Count(pixel => pixel == '0')).First();
             return $"{l.Count(p => p == '1') * l.Count(p => p == '2')}";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             return Enumerable.Range(0, 25 * 6)
                 .Select(p => Enumerable.Range(0, photo.Count)

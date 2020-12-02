@@ -32,12 +32,12 @@ namespace aoc2019
             return total;
         }
 
-        public override string Part1()
+        protected override string Part1()
         {
             return $"{masses.Sum(FuelCost)}";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             return $"{masses.Sum(FullCost)}";
         }

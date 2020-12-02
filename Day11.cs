@@ -80,12 +80,12 @@ namespace aoc2019
             return map;
         }
 
-        public override string Part1()
+        protected override string Part1()
         {
             return $"{PaintShip(0).Count}";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             var map = PaintShip(1);
             var minX = (int) map.Keys.Select(x => x.x).Min();

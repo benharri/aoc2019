@@ -14,14 +14,14 @@ namespace aoc2019
 
         public override int DayNumber => 9;
 
-        public override string Part1()
+        protected override string Part1()
         {
             vm.Reset();
             vm.Run(1);
             return $"{vm.output.ToDelimitedString(",")}";
         }
 
-        public override string Part2()
+        protected override string Part2()
         {
             vm.Reset();
             vm.Run(2);
