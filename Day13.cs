@@ -38,19 +38,18 @@ namespace aoc2019
 
         private void PrintBoard()
         {
-            foreach (var tile in board)
+            foreach (var ((x, y), value) in board)
             {
-                var (x, y) = tile.Key;
                 if (x < 0 || y < 0) continue;
                 Console.SetCursorPosition(x, y);
-                Console.Write(tile.Value switch
+                Console.Write(value switch
                 {
                     0 => " ",
                     1 => "|",
                     2 => "B",
                     3 => "_",
                     4 => ".",
-                    _ => tile.Value
+                    _ => value
                 });
             }
         }
