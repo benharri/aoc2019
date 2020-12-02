@@ -4,7 +4,6 @@ name: run
 
 steps:
     - name: run
-      image: mcr.microsoft.com/dotnet/core/sdk:latest
+      image: mcr.microsoft.com/dotnet/sdk:latest
       commands:
           - dotnet run
-

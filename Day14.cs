@@ -22,7 +22,7 @@ namespace aoc2019
         private bool Consume(string chem, long quantity)
         {
             if (quantity <= 0)
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(quantity));
 
             if (!available!.ContainsKey(chem))
                 available[chem] = 0;
@@ -59,9 +59,16 @@ namespace aoc2019
 
         public override string Part2()
         {
-            available = new Dictionary<string, long> {{"ORE", 1000000000000}};
-            Consume("FUEL", long.MaxValue);
-            return "";
+            const long capacity = 1_000_000_000_000;
+            available = new Dictionary<string, long> {{"ORE", capacity}};
+            Consume("FUEL", 1);
+
+            var oreConsumed = capacity - available["ORE"];
+            while (Produce("FUEL", Math.Max(1, available["ORE"] / oreConsumed)))
+            {
+            }
+
+            return $"{available["FUEL"]}";
         }
 
         private struct Component

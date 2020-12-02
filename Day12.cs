@@ -6,9 +6,8 @@ namespace aoc2019
 {
     internal sealed class Day12 : Day
     {
-        private readonly List<Position> startingPositions;
-
         private readonly List<Position> moons;
+        private readonly List<Position> startingPositions;
         private int step;
 
         public Day12()
