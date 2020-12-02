@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal class Day3 : Day
+    internal sealed class Day3 : Day
     {
         public override int DayNumber => 3;
 

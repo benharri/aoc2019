@@ -5,19 +5,24 @@ using System.Reflection;
 
 namespace aoc2019
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            var days = GetDays();
+            var days = 
+                Assembly.GetExecutingAssembly().GetTypes()
+                    .Where(t => t.BaseType == typeof(Day))
+                    .Select(t => (Day) Activator.CreateInstance(t))
+                    .OrderBy(d => d.DayNumber);
 
-            if (args.Length == 1 && int.TryParse(args[0], out int daynum))
+            if (args.Length == 1 && int.TryParse(args[0], out var dayNum))
             {
-                var d = days.Where(d => d.DayNumber == daynum);
-                if (d.Any())
-                    d.First().AllParts();
+                var day = days.FirstOrDefault(d => d.DayNumber == dayNum);
+                
+                if (day != null)
+                    day.AllParts();
                 else
-                    Console.WriteLine($"{daynum} invalid or not yet implemented");
+                    Console.WriteLine($"{dayNum} invalid or not yet implemented");
             }
             else
             {
@@ -27,11 +32,5 @@ namespace aoc2019
                 }
             }
         }
-
-        private static IEnumerable<Day> GetDays() =>
-            Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.BaseType == typeof(Day))
-                .Select(t => (Day)Activator.CreateInstance(t))
-                .OrderBy(d => d.DayNumber);
     }
 }

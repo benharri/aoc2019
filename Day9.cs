@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal class Day9 : Day
+    internal sealed class Day9 : Day
     {
         public override int DayNumber => 9;
         private readonly IntCodeVM vm;

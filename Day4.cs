@@ -2,7 +2,7 @@
 
 namespace aoc2019
 {
-    internal class Day4 : Day
+    internal sealed class Day4 : Day
     {
         public override int DayNumber => 4;
 

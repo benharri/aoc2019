@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal class Day14 : Day
+    internal sealed class Day14 : Day
     {
         public override int DayNumber => 14;
 
@@ -19,10 +19,10 @@ namespace aoc2019
 
         private class Reaction
         {
-            public Component product;
-            public Component[] reactants;
+            public readonly Component product;
+            public readonly Component[] reactants;
 
-            public Reaction(Component[] reactants, Component product)
+            private Reaction(Component[] reactants, Component product)
             {
                 this.reactants = reactants;
                 this.product = product;
@@ -39,11 +39,11 @@ namespace aoc2019
 
                 static Component ParseComponent(string s)
                 {
-                    var i = s.IndexOf(' ');
+                    var spl = s.Split(' ', 2);
                     return new Component
                     {
-                        Name = s[(i + 1)..],
-                        Quantity = int.Parse(s.Substring(i))
+                        Quantity = int.Parse(spl[0]),
+                        Name = spl[1]
                     };
                 }
             }
