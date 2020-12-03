@@ -8,7 +8,7 @@ namespace aoc2019
     internal sealed class Day15 : Day
     {
         private readonly IntCodeVM vm;
-        private bool verbose = false;
+        private readonly bool verbose = false;
 
         public Day15()
         {
