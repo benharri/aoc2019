@@ -39,6 +39,11 @@ namespace aoc2019.lib
             output.Clear();
         }
 
+        public void AddInput(params long[] values)
+        {
+            foreach (var v in values) AddInput(v);
+        }
+
         public void AddInput(long value)
         {
             input.Enqueue(value);
