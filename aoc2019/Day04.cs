@@ -2,7 +2,7 @@
 
 namespace aoc2019
 {
-    internal sealed class Day04 : Day
+    public sealed class Day04 : Day
     {
         private readonly int end;
 
@@ -36,12 +36,12 @@ namespace aoc2019
             return IsValid(i) && s.Select(c => s.Count(j => j == c)).Any(c => c == 2);
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             return $"{Enumerable.Range(start, end).Count(IsValid)}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             return $"{Enumerable.Range(start, end).Count(HasOnePair)}";
         }

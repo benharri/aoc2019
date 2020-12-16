@@ -5,7 +5,7 @@ using aoc2019.lib;
 
 namespace aoc2019
 {
-    internal sealed class Day17 : Day
+    public sealed class Day17 : Day
     {
         private const bool Verbose = false;
 
@@ -16,7 +16,7 @@ namespace aoc2019
             vm = new IntCodeVM(Input.First());
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             vm.Reset();
             vm.Run();
@@ -39,7 +39,7 @@ namespace aoc2019
             return $"{sum}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             //vm.Reset();
             //vm.memory[0] = 2;

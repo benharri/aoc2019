@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal sealed class Day06 : Day
+    public sealed class Day06 : Day
     {
         private readonly Dictionary<string, string> input;
 
@@ -21,12 +21,12 @@ namespace aoc2019
             return res;
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             return $"{input.Keys.Sum(o => GetParents(o).Count - 1)}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             var you = GetParents("YOU");
             var san = GetParents("SAN");

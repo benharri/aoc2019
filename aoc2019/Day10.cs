@@ -5,7 +5,7 @@ using aoc2019.lib;
 
 namespace aoc2019
 {
-    internal sealed class Day10 : Day
+    public sealed class Day10 : Day
     {
         private readonly HashSet<(int x, int y)> asteroids;
         private (int x, int y) best = (x: -1, y: -1);
@@ -21,7 +21,7 @@ namespace aoc2019
                 .ToHashSet();
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             foreach (var asteroid in asteroids)
             {
@@ -41,7 +41,7 @@ namespace aoc2019
             return $"{bestCanSee}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             static IEnumerable<(int x, int y, double angle, double dist)> GetValue(
                 Queue<(int x, int y, double angle, double dist)> q)

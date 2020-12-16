@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal sealed class Day01 : Day
+    public sealed class Day01 : Day
     {
         private readonly IEnumerable<int> masses;
 
@@ -30,12 +30,12 @@ namespace aoc2019
             return total;
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             return $"{masses.Sum(FuelCost)}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             return $"{masses.Sum(FullCost)}";
         }

@@ -5,7 +5,7 @@ using aoc2019.lib;
 
 namespace aoc2019
 {
-    internal sealed class Day13 : Day
+    public sealed class Day13 : Day
     {
         private readonly Dictionary<(int x, int y), int> board;
 
@@ -52,14 +52,14 @@ namespace aoc2019
             }
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             vm.Reset();
             vm.Run();
             return $"{vm.output.Where((v, i) => (i + 1) % 3 == 0 && v == 2).Count()}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             vm.Reset();
             vm.memory[0] = 2;

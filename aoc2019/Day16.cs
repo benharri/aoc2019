@@ -5,7 +5,7 @@ using aoc2019.lib;
 
 namespace aoc2019
 {
-    internal sealed class Day16 : Day
+    public sealed class Day16 : Day
     {
         private static readonly int[] BasePattern = {0, 1, 0, -1};
         private readonly int[] initialList;
@@ -15,7 +15,7 @@ namespace aoc2019
             initialList = Input.First().Select(c => int.Parse($"{c}")).ToArray();
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             const int phaseCount = 100;
             var signal0 = initialList.ToArray();
@@ -29,7 +29,7 @@ namespace aoc2019
                     .ToArray());
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             const int phaseCount = 100;
             var messageOffset = initialList.Take(7).Aggregate((n, i) => n * 10 + i);

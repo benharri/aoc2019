@@ -5,7 +5,7 @@ using aoc2019.lib;
 
 namespace aoc2019
 {
-    internal sealed class Day11 : Day
+    public sealed class Day11 : Day
     {
         private readonly IntCodeVM vm;
         private Direction heading;
@@ -78,12 +78,12 @@ namespace aoc2019
             return map;
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             return $"{PaintShip(0).Count}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             var map = PaintShip(1);
             var minX = (int) map.Keys.Select(x => x.x).Min();

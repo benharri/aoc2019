@@ -3,7 +3,7 @@ using aoc2019.lib;
 
 namespace aoc2019
 {
-    internal sealed class Day09 : Day
+    public sealed class Day09 : Day
     {
         private readonly IntCodeVM vm;
 
@@ -12,14 +12,14 @@ namespace aoc2019
             vm = new IntCodeVM(Input.First());
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             vm.Reset();
             vm.Run(1);
             return $"{vm.output.ToDelimitedString(",")}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             vm.Reset();
             vm.Run(2);

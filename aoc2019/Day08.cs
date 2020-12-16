@@ -5,7 +5,7 @@ using aoc2019.lib;
 
 namespace aoc2019
 {
-    internal sealed class Day08 : Day
+    public sealed class Day08 : Day
     {
         private readonly List<List<char>> photo;
 
@@ -14,13 +14,13 @@ namespace aoc2019
             photo = Input.First().Chunk(25 * 6).Select(s => s.ToList()).ToList();
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             var l = photo.OrderBy(layer => layer.Count(pixel => pixel == '0')).First();
             return $"{l.Count(p => p == '1') * l.Count(p => p == '2')}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             return Enumerable.Range(0, 25 * 6)
                 .Select(p => Enumerable.Range(0, photo.Count)

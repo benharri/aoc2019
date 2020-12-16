@@ -43,7 +43,7 @@ namespace aoc2019
             Console.WriteLine();
         }
 
-        protected abstract string Part1();
-        protected abstract string Part2();
+        public abstract string Part1();
+        public abstract string Part2();
     }
 }

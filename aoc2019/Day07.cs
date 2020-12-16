@@ -4,7 +4,7 @@ using aoc2019.lib;
 
 namespace aoc2019
 {
-    internal sealed class Day07 : Day
+    public sealed class Day07 : Day
     {
         private readonly IntCodeVM[] Amplifiers = new IntCodeVM[5];
 
@@ -13,7 +13,7 @@ namespace aoc2019
             for (var i = 0; i < 5; i++) Amplifiers[i] = new IntCodeVM(Input.First());
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             long i, largest = 0;
 
@@ -34,7 +34,7 @@ namespace aoc2019
             return $"{largest}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             long i, largest = 0;
 

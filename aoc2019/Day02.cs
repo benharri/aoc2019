@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal sealed class Day02 : Day
+    public sealed class Day02 : Day
     {
         private readonly IEnumerable<int> input;
 
@@ -28,12 +28,12 @@ namespace aoc2019
             return v[0];
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             return $"{RunIntCode(12, 2)}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             for (var i = 0; i < 100; i++)
             for (var j = 0; j < 100; j++)

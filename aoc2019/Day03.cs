@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal sealed class Day03 : Day
+    public sealed class Day03 : Day
     {
         private readonly IEnumerable<(int, int)> intersections;
         private readonly List<Dictionary<(int, int), int>> wires;
@@ -15,12 +15,12 @@ namespace aoc2019
             intersections = wires[0].Keys.Intersect(wires[1].Keys);
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             return $"{intersections.Min(x => Math.Abs(x.Item1) + Math.Abs(x.Item2))}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             // add 2 to count (0, 0) on both lines
             return $"{intersections.Min(x => wires[0][x] + wires[1][x]) + 2}";

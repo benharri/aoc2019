@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal sealed class Day14 : Day
+    public sealed class Day14 : Day
     {
         private readonly Dictionary<string, Reaction> reactions;
 
@@ -48,14 +48,14 @@ namespace aoc2019
             return true;
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             available = new Dictionary<string, long> {{"ORE", long.MaxValue}};
             Consume("FUEL", 1);
             return $"{long.MaxValue - available["ORE"]}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             const long capacity = 1_000_000_000_000;
             available = new Dictionary<string, long> {{"ORE", capacity}};

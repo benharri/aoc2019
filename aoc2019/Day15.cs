@@ -5,7 +5,7 @@ using aoc2019.lib;
 
 namespace aoc2019
 {
-    internal sealed class Day15 : Day
+    public sealed class Day15 : Day
     {
         private readonly bool verbose = false;
         private readonly IntCodeVM vm;
@@ -15,7 +15,7 @@ namespace aoc2019
             vm = new IntCodeVM(Input.First());
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             vm.Reset();
             var currentLocation = new Location(0, 0);
@@ -109,7 +109,7 @@ namespace aoc2019
             return "";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             var changed = true;
             while (changed)

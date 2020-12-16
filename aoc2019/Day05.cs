@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal sealed class Day05 : Day
+    public sealed class Day05 : Day
     {
         private readonly IEnumerable<int> tape;
 
@@ -63,13 +63,13 @@ namespace aoc2019
             }
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             RunIntCode(tape.ToList(), 1);
             return $"{output}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             RunIntCode(tape.ToList(), 5);
             return $"{output}";

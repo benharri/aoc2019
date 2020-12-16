@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal sealed class Day12 : Day
+    public sealed class Day12 : Day
     {
         private readonly List<Position> moons;
         private int step;
@@ -48,7 +48,7 @@ namespace aoc2019
             step++;
         }
 
-        protected override string Part1()
+        public override string Part1()
         {
             while (step < 1000)
                 Step();
@@ -56,7 +56,7 @@ namespace aoc2019
             return $"{moons.Sum(p => p.TotalEnergy)}";
         }
 
-        protected override string Part2()
+        public override string Part2()
         {
             int cycleX = 0, cycleY = 0, cycleZ = 0;
 
