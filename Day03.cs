@@ -4,18 +4,16 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal sealed class Day3 : Day
+    internal sealed class Day03 : Day
     {
         private readonly IEnumerable<(int, int)> intersections;
         private readonly List<Dictionary<(int, int), int>> wires;
 
-        public Day3()
+        public Day03() : base(3, "Crossed Wires")
         {
             wires = Input.Select(ParseWire).ToList();
             intersections = wires[0].Keys.Intersect(wires[1].Keys);
         }
-
-        public override int DayNumber => 3;
 
         protected override string Part1()
         {

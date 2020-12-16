@@ -3,18 +3,16 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal sealed class Day5 : Day
+    internal sealed class Day05 : Day
     {
         private readonly IEnumerable<int> tape;
 
         private int output;
 
-        public Day5()
+        public Day05() : base(5, "Sunny with a Chance of Asteroids")
         {
             tape = Input.First().Split(',').Select(int.Parse);
         }
-
-        public override int DayNumber => 5;
 
         public void RunIntCode(List<int> v, int input)
         {

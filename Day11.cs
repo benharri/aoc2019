@@ -11,12 +11,10 @@ namespace aoc2019
         private Direction heading;
         private long x, y;
 
-        public Day11()
+        public Day11() : base(11, "Space Police")
         {
             vm = new IntCodeVM(Input.First());
         }
-
-        public override int DayNumber => 11;
 
         private void Move()
         {

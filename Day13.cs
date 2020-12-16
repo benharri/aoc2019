@@ -11,13 +11,11 @@ namespace aoc2019
 
         private readonly IntCodeVM vm;
 
-        public Day13()
+        public Day13() : base(13, "Care Package")
         {
             vm = new IntCodeVM(Input.First());
             board = new Dictionary<(int, int), int>();
         }
-
-        public override int DayNumber => 13;
 
         private void UpdateTiles(IEnumerable<long> queue)
         {
@@ -65,9 +63,9 @@ namespace aoc2019
         {
             vm.Reset();
             vm.memory[0] = 2;
-            var printboard = false;
+            var printBoard = false;
             var gameTicks = 0;
-            if (printboard) Console.Clear();
+            if (printBoard) Console.Clear();
 
             var haltType = IntCodeVM.HaltType.Waiting;
             while (haltType == IntCodeVM.HaltType.Waiting)
@@ -80,7 +78,7 @@ namespace aoc2019
                 vm.AddInput(ball > paddle ? 1 : ball < paddle ? -1 : 0);
 
                 gameTicks++;
-                if (printboard) PrintBoard();
+                if (printBoard) PrintBoard();
             }
 
             return $"after {gameTicks} moves, the score is: {board[(-1, 0)]}";

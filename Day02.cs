@@ -3,16 +3,14 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal sealed class Day2 : Day
+    internal sealed class Day02 : Day
     {
         private readonly IEnumerable<int> input;
 
-        public Day2()
+        public Day02() : base(2, "1202 Program Alarm")
         {
             input = Input.First().Split(',').Select(int.Parse);
         }
-
-        public override int DayNumber => 2;
 
         public int RunIntCode(int noun, int verb)
         {

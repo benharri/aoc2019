@@ -2,20 +2,18 @@
 
 namespace aoc2019
 {
-    internal sealed class Day4 : Day
+    internal sealed class Day04 : Day
     {
         private readonly int end;
 
         private readonly int start;
 
-        public Day4()
+        public Day04() : base(4, "Secure Container")
         {
             var range = Input.First().Split('-').Select(int.Parse).ToList();
             start = range[0];
             end = range[1];
         }
-
-        public override int DayNumber => 4;
 
         private bool IsValid(int i)
         {

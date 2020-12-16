@@ -10,14 +10,12 @@ namespace aoc2019
 
         private Dictionary<string, long> available;
 
-        public Day14()
+        public Day14() : base(14, "Space Stoichiometry")
         {
             reactions = Input
                 .Select(Reaction.Parse)
                 .ToDictionary(r => r.product.Name);
         }
-
-        public override int DayNumber => 14;
 
         private bool Consume(string chem, long quantity)
         {

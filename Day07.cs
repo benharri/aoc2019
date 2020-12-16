@@ -4,17 +4,14 @@ using aoc2019.lib;
 
 namespace aoc2019
 {
-    internal sealed class Day7 : Day
+    internal sealed class Day07 : Day
     {
         private readonly IntCodeVM[] Amplifiers = new IntCodeVM[5];
 
-        public Day7()
+        public Day07() : base(7, "Amplification Circuit")
         {
             for (var i = 0; i < 5; i++) Amplifiers[i] = new IntCodeVM(Input.First());
         }
-
-        public override int DayNumber => 7;
-
 
         protected override string Part1()
         {

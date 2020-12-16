@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace aoc2019.lib
@@ -27,6 +28,21 @@ namespace aoc2019.lib
             while (count == null || count-- > 0)
                 foreach (var item in sequence)
                     yield return item;
+        }
+
+        /// <summary>
+        ///     increased accuracy for stopwatch based on frequency.
+        ///     <see
+        ///         href="http://geekswithblogs.net/BlackRabbitCoder/archive/2012/01/12/c.net-little-pitfalls-stopwatch-ticks-are-not-timespan-ticks.aspx">
+        ///         blog
+        ///         details here
+        ///     </see>
+        /// </summary>
+        /// <param name="stopwatch"></param>
+        /// <returns></returns>
+        public static double ScaleMilliseconds(this Stopwatch stopwatch)
+        {
+            return 1_000 * stopwatch.ElapsedTicks / (double) Stopwatch.Frequency;
         }
     }
 }

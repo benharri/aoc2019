@@ -10,12 +10,10 @@ namespace aoc2019
         private readonly bool verbose = false;
         private readonly IntCodeVM vm;
 
-        public Day15()
+        public Day15() : base(15, "Oxygen System")
         {
             vm = new IntCodeVM(Input.First());
         }
-
-        public override int DayNumber => 15;
 
         protected override string Part1()
         {

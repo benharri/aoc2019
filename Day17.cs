@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using aoc2019.lib;
@@ -12,12 +11,10 @@ namespace aoc2019
 
         private readonly IntCodeVM vm;
 
-        public Day17()
+        public Day17() : base(17, "Set and Forget")
         {
             vm = new IntCodeVM(Input.First());
         }
-
-        public override int DayNumber => 17;
 
         protected override string Part1()
         {
@@ -44,13 +41,13 @@ namespace aoc2019
 
         protected override string Part2()
         {
-            vm.Reset();
-            vm.memory[0] = 2;
-            var halt = IntCodeVM.HaltType.Waiting;
-            while (halt == IntCodeVM.HaltType.Waiting)
-            {
-                halt = vm.Run();
-            }
+            //vm.Reset();
+            //vm.memory[0] = 2;
+            //var halt = IntCodeVM.HaltType.Waiting;
+            //while (halt == IntCodeVM.HaltType.Waiting)
+            //{
+            //    halt = vm.Run();
+            //}
             return "";
         }
     }

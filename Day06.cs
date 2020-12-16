@@ -3,16 +3,14 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal sealed class Day6 : Day
+    internal sealed class Day06 : Day
     {
         private readonly Dictionary<string, string> input;
 
-        public Day6()
+        public Day06() : base(6, "Universal Orbit Map")
         {
             input = Input.ToDictionary(i => i.Split(')')[1], i => i.Split(')')[0]);
         }
-
-        public override int DayNumber => 6;
 
         private List<string> GetParents(string obj)
         {

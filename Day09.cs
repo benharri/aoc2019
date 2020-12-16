@@ -3,16 +3,14 @@ using aoc2019.lib;
 
 namespace aoc2019
 {
-    internal sealed class Day9 : Day
+    internal sealed class Day09 : Day
     {
         private readonly IntCodeVM vm;
 
-        public Day9()
+        public Day09() : base(9, "Sensor Boost")
         {
             vm = new IntCodeVM(Input.First());
         }
-
-        public override int DayNumber => 9;
 
         protected override string Part1()
         {

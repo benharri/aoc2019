@@ -7,10 +7,9 @@ namespace aoc2019
     internal sealed class Day12 : Day
     {
         private readonly List<Position> moons;
-        private readonly List<Position> startingPositions;
         private int step;
 
-        public Day12()
+        public Day12() : base(12, "The N-Body Problem")
         {
             moons = Input
                 .Select(moon =>
@@ -25,11 +24,7 @@ namespace aoc2019
 
             foreach (var moon in moons)
                 moon.SetSiblings(moons);
-
-            startingPositions = moons;
         }
-
-        public override int DayNumber => 12;
 
         public static long LCM(long a, long b)
         {

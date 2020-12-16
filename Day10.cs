@@ -7,11 +7,11 @@ namespace aoc2019
 {
     internal sealed class Day10 : Day
     {
-        private readonly HashSet<(int x, int y)> asteroids = new HashSet<(int x, int y)>();
+        private readonly HashSet<(int x, int y)> asteroids;
         private (int x, int y) best = (x: -1, y: -1);
-        private int bestcansee;
+        private int bestCanSee;
 
-        public Day10()
+        public Day10() : base(10, "Monitoring Station")
         {
             asteroids = Input
                 .Select((r, y) => r.Select((c, x) => (x, y, isAsteroid: c == '#')).ToArray())
@@ -21,26 +21,24 @@ namespace aoc2019
                 .ToHashSet();
         }
 
-        public override int DayNumber => 10;
-
         protected override string Part1()
         {
             foreach (var asteroid in asteroids)
             {
-                var cansee = asteroids
+                var canSee = asteroids
                     .Except(new[] {asteroid})
                     .Select(a => (x: a.x - asteroid.x, y: a.y - asteroid.y))
                     .GroupBy(a => Math.Atan2(a.y, a.x))
                     .Count();
 
-                if (cansee > bestcansee)
+                if (canSee > bestCanSee)
                 {
                     best = asteroid;
-                    bestcansee = cansee;
+                    bestCanSee = canSee;
                 }
             }
 
-            return $"{bestcansee}";
+            return $"{bestCanSee}";
         }
 
         protected override string Part2()
@@ -55,10 +53,10 @@ namespace aoc2019
                 .Where(a => a != best)
                 .Select(a =>
                 {
-                    var xdist = a.x - best.x;
-                    var ydist = a.y - best.y;
-                    var angle = Math.Atan2(xdist, ydist);
-                    return (a.x, a.y, angle, dist: Math.Sqrt(xdist * xdist + ydist * ydist));
+                    var xDist = a.x - best.x;
+                    var yDist = a.y - best.y;
+                    var angle = Math.Atan2(xDist, yDist);
+                    return (a.x, a.y, angle, dist: Math.Sqrt(xDist * xDist + yDist * yDist));
                 })
                 .ToLookup(a => a.angle)
                 .OrderByDescending(a => a.Key)

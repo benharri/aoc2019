@@ -10,12 +10,10 @@ namespace aoc2019
         private static readonly int[] BasePattern = {0, 1, 0, -1};
         private readonly int[] initialList;
 
-        public Day16()
+        public Day16() : base(16, "Flawed Frequency Transmission")
         {
             initialList = Input.First().Select(c => int.Parse($"{c}")).ToArray();
         }
-
-        public override int DayNumber => 16;
 
         protected override string Part1()
         {

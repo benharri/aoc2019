@@ -5,16 +5,14 @@ using aoc2019.lib;
 
 namespace aoc2019
 {
-    internal sealed class Day8 : Day
+    internal sealed class Day08 : Day
     {
         private readonly List<List<char>> photo;
 
-        public Day8()
+        public Day08() : base(8, "Space Image Format")
         {
             photo = Input.First().Chunk(25 * 6).Select(s => s.ToList()).ToList();
         }
-
-        public override int DayNumber => 8;
 
         protected override string Part1()
         {

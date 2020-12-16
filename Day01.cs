@@ -3,16 +3,14 @@ using System.Linq;
 
 namespace aoc2019
 {
-    internal sealed class Day1 : Day
+    internal sealed class Day01 : Day
     {
         private readonly IEnumerable<int> masses;
 
-        public Day1()
+        public Day01() : base(1, "The Tyranny of the Rocket Equation")
         {
             masses = Input.Select(int.Parse);
         }
-
-        public override int DayNumber => 1;
 
         private static int FuelCost(int weight)
         {
