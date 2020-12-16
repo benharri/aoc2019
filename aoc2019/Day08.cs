@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using aoc2019.lib;
@@ -31,7 +30,7 @@ namespace aoc2019
                 )
                 .ToDelimitedString()
                 .Chunk(25)
-                .ToDelimitedString(Environment.NewLine)
+                .ToDelimitedString("\n")
                 .Replace('1', 'x');
         }
     }

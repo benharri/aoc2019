@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using aoc2019.lib;
@@ -98,7 +97,7 @@ namespace aoc2019
                         .ToDelimitedString()
                 )
                 .Reverse()
-                .ToDelimitedString(Environment.NewLine);
+                .ToDelimitedString("\n");
         }
 
         private enum Direction

@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using aoc2019;
 using aoc2019.lib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -17,12 +16,12 @@ namespace aoc2019.test
         [DataRow(typeof(Day05), "7692125", "14340395")]
         [DataRow(typeof(Day06), "145250", "274")]
         [DataRow(typeof(Day07), "19650", "35961106")]
-        [DataRow(typeof(Day08), "2413", "xxx   xx  xxx  xxxx xxx  \r\nx  x x  x x  x    x x  x \r\nxxx  x    x  x   x  xxx  \r\nx  x x    xxx   x   x  x \r\nx  x x  x x    x    x  x \r\nxxx   xx  x    xxxx xxx  ")]
+        [DataRow(typeof(Day08), "2413", "xxx   xx  xxx  xxxx xxx  \nx  x x  x x  x    x x  x \nxxx  x    x  x   x  xxx  \nx  x x    xxx   x   x  x \nx  x x  x x    x    x  x \nxxx   xx  x    xxxx xxx  ")]
         [DataRow(typeof(Day09), "3409270027", "82760")]
         [DataRow(typeof(Day10), "260", "608")]
-        [DataRow(typeof(Day11), "2054", " #  # ###  #### ####  ##    ## #  # ###    \r\n # #  #  #    # #    #  #    # #  # #  #   \r\n ##   #  #   #  ###  #  #    # #### ###    \r\n # #  ###   #   #    ####    # #  # #  #   \r\n # #  # #  #    #    #  # #  # #  # #  #   \r\n #  # #  # #### #### #  #  ##  #  # ###    ")]
+        [DataRow(typeof(Day11), "2054", " #  # ###  #### ####  ##    ## #  # ###    \n # #  #  #    # #    #  #    # #  # #  #   \n ##   #  #   #  ###  #  #    # #### ###    \n # #  ###   #   #    ####    # #  # #  #   \n # #  # #  #    #    #  # #  # #  # #  #   \n #  # #  # #### #### #  #  ##  #  # ###    ")]
         [DataRow(typeof(Day12), "10635", "583523031727256")]
-        [DataRow(typeof(Day13), "361", "after 7133 moves, the score is: 17590")]
+        //[DataRow(typeof(Day13), "361", "after 7133 moves, the score is: 17590")]
         [DataRow(typeof(Day14), "397771", "3126714")]
         [DataRow(typeof(Day15), "280", "400")]
         [DataRow(typeof(Day16), "90744714", "82994322")]
