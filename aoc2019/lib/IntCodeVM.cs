@@ -16,12 +16,12 @@ namespace aoc2019.lib
         private long i;
         public Queue<long> input, output;
         public long[] memory;
-        private long relbase;
+        private long relativeBase;
 
         public IntCodeVM(string tape)
         {
             i = 0;
-            relbase = 0;
+            relativeBase = 0;
             program = tape.Split(',').Select(long.Parse).ToArray();
             memory = program;
             input = new Queue<long>();
@@ -33,7 +33,7 @@ namespace aoc2019.lib
         public void Reset()
         {
             i = 0;
-            relbase = 0;
+            relativeBase = 0;
             memory = program;
             input.Clear();
             output.Clear();
@@ -77,7 +77,7 @@ namespace aoc2019.lib
             {
                 case 0: return MemGet(param);
                 case 1: return param;
-                case 2: return MemGet(relbase + param);
+                case 2: return MemGet(relativeBase + param);
                 default: throw new Exception("invalid parameter mode");
             }
         }
@@ -92,7 +92,7 @@ namespace aoc2019.lib
                     break;
                 case 1: throw new Exception("cannot set in immediate mode");
                 case 2:
-                    MemSet(relbase + param, val);
+                    MemSet(relativeBase + param, val);
                     break;
                 default: throw new Exception("invalid parameter mode");
             }
@@ -144,7 +144,7 @@ namespace aoc2019.lib
                         i += 4;
                         break;
                     case 9:
-                        relbase += Get(1);
+                        relativeBase += Get(1);
                         i += 2;
                         break;
                     case 99:
