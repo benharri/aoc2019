@@ -7,8 +7,7 @@ namespace aoc2019
 {
     public sealed class Day17 : Day
     {
-        private const bool Verbose = false;
-
+        private readonly bool Verbose = false;
         private readonly IntCodeVM vm;
 
         public Day17() : base(17, "Set and Forget")

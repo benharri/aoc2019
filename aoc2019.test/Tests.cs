@@ -16,10 +16,12 @@ namespace aoc2019.test
         [DataRow(typeof(Day05), "7692125", "14340395")]
         [DataRow(typeof(Day06), "145250", "274")]
         [DataRow(typeof(Day07), "19650", "35961106")]
-        [DataRow(typeof(Day08), "2413", "xxx   xx  xxx  xxxx xxx  \nx  x x  x x  x    x x  x \nxxx  x    x  x   x  xxx  \nx  x x    xxx   x   x  x \nx  x x  x x    x    x  x \nxxx   xx  x    xxxx xxx  ")]
+        [DataRow(typeof(Day08), "2413",
+            "\nxxx   xx  xxx  xxxx xxx  \nx  x x  x x  x    x x  x \nxxx  x    x  x   x  xxx  \nx  x x    xxx   x   x  x \nx  x x  x x    x    x  x \nxxx   xx  x    xxxx xxx  ")]
         [DataRow(typeof(Day09), "3409270027", "82760")]
         [DataRow(typeof(Day10), "260", "608")]
-        [DataRow(typeof(Day11), "2054", " #  # ###  #### ####  ##    ## #  # ###    \n # #  #  #    # #    #  #    # #  # #  #   \n ##   #  #   #  ###  #  #    # #### ###    \n # #  ###   #   #    ####    # #  # #  #   \n # #  # #  #    #    #  # #  # #  # #  #   \n #  # #  # #### #### #  #  ##  #  # ###    ")]
+        [DataRow(typeof(Day11), "2054",
+            "\n #  # ###  #### ####  ##    ## #  # ###    \n # #  #  #    # #    #  #    # #  # #  #   \n ##   #  #   #  ###  #  #    # #### ###    \n # #  ###   #   #    ####    # #  # #  #   \n # #  # #  #    #    #  # #  # #  # #  #   \n #  # #  # #### #### #  #  ##  #  # ###    ")]
         [DataRow(typeof(Day12), "10635", "583523031727256")]
         //[DataRow(typeof(Day13), "361", "after 7133 moves, the score is: 17590")]
         [DataRow(typeof(Day14), "397771", "3126714")]
@@ -27,6 +29,8 @@ namespace aoc2019.test
         [DataRow(typeof(Day16), "90744714", "82994322")]
         [DataRow(typeof(Day17), "2804", "")]
         [DataRow(typeof(Day19), "114", "10671712")]
+        [DataRow(typeof(Day21), "", "")]
+        [DataRow(typeof(Day23), "23626", "19019")]
         public void TestAllDays(Type dayType, string part1, string part2)
         {
             // create day instance

@@ -85,15 +85,15 @@ namespace aoc2019
         public override string Part2()
         {
             var map = PaintShip(1);
-            var minX = (int) map.Keys.Select(x => x.x).Min();
-            var maxX = (int) map.Keys.Select(x => x.x).Max();
-            var minY = (int) map.Keys.Select(x => x.y).Min();
-            var maxY = (int) map.Keys.Select(x => x.y).Max();
+            var minX = (int) map.Keys.Select(i => i.x).Min();
+            var maxX = (int) map.Keys.Select(i => i.x).Max();
+            var minY = (int) map.Keys.Select(i => i.y).Min();
+            var maxY = (int) map.Keys.Select(i => i.y).Max();
 
-            return Enumerable.Range(minY, maxY - minY + 1)
-                .Select(y =>
+            return "\n" + Enumerable.Range(minY, maxY - minY + 1)
+                .Select(j =>
                     Enumerable.Range(minX, maxX - minX + 1)
-                        .Select(x => map.GetValueOrDefault((x, y)) == 0 ? ' ' : '#')
+                        .Select(i => map.GetValueOrDefault((x: i, y: j)) == 0 ? ' ' : '#')
                         .ToDelimitedString()
                 )
                 .Reverse()

@@ -21,7 +21,7 @@ namespace aoc2019
 
         public override string Part2()
         {
-            return Enumerable.Range(0, 25 * 6)
+            return "\n" + Enumerable.Range(0, 25 * 6)
                 .Select(p => Enumerable.Range(0, photo.Count)
                     .Select(l => photo[l][p])
                     .Aggregate('2', (acc, next) =>
