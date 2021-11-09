@@ -17,20 +17,27 @@ public sealed class Day15 : Day
         var halt = IntCodeVM.HaltType.Waiting;
         while (halt == IntCodeVM.HaltType.Waiting)
         {
-            var direction = currentLocation!.NextDirection();
+            var direction = currentLocation.NextDirection();
             if (direction <= 4)
             {
                 var (x, y) = currentLocation.Neighbor(direction);
                 if (Location.GetLocation(x, y) == null)
                 {
                     halt = vm.Run(direction);
-                    currentLocation = vm.Result switch
+                    switch (vm.Result)
                     {
-                        Location.Wall   => new Location(x, y, Location.Opposites[direction], Location.Wall),
-                        Location.Empty  => new Location(x, y, Location.Opposites[direction]),
-                        Location.System => new Location(x, y, Location.Opposites[direction], Location.System),
-                        _ => throw new Exception($"Unknown IntCodeVM response: {vm.Result}"),
-                    };
+                        case Location.Wall:
+                            _ = new Location(x, y, Location.Opposites[direction], Location.Wall);
+                            break;
+                        case Location.Empty:
+                            currentLocation = new Location(x, y, Location.Opposites[direction]);
+                            break;
+                        case Location.System:
+                            currentLocation = new Location(x, y, Location.Opposites[direction], Location.System);
+                            break;
+                        default:
+                            throw new Exception($"Unknown IntCodeVM response: {vm.Result}");
+                    }
                 }
             }
             else
@@ -39,11 +46,15 @@ public sealed class Day15 : Day
                 if (direction > 0)
                 {
                     halt = vm.Run(direction);
-                    currentLocation = vm.Result switch
+                    switch (vm.Result)
                     {
-                        Location.Empty or Location.System => Location.GetLocation(currentLocation.Neighbor(direction)),
-                        _ => throw new Exception($"Unknown or unexpected response for previous room: {vm.Result}"),
-                    };
+                        case Location.Empty:
+                        case Location.System:
+                            currentLocation = Location.GetLocation(currentLocation.Neighbor(direction));
+                            break;
+                        default:
+                            throw new Exception($"Unknown or unexpected response for previous room: {vm.Result}");
+                    }
                 }
                 else
                 {
@@ -79,10 +90,10 @@ public sealed class Day15 : Day
 
                     currentLocation = Location.OxygenLocation;
                     var distance = 0;
-                    while (currentLocation?.PreviousDirection != 0)
+                    while (currentLocation.PreviousDirection != 0)
                     {
                         distance++;
-                        currentLocation = Location.GetLocation(currentLocation!.PreviousLocation());
+                        currentLocation = Location.GetLocation(currentLocation.PreviousLocation());
                     }
 
                     return $"{distance}";
@@ -143,7 +154,7 @@ public sealed class Day15 : Day
             AllLocations.Add((x, y), this);
         }
 
-        public static Location? OxygenLocation { get; private set; }
+        public static Location OxygenLocation { get; private set; }
         public int PreviousDirection { get; }
         private int X { get; }
         private int Y { get; }
@@ -193,12 +204,12 @@ public sealed class Day15 : Day
             return searchDirection++;
         }
 
-        public static Location? GetLocation(int x, int y)
+        public static Location GetLocation(int x, int y)
         {
             return AllLocations.ContainsKey((x, y)) ? AllLocations[(x, y)] : null;
         }
 
-        public static Location? GetLocation((int x, int y) coords)
+        public static Location GetLocation((int x, int y) coords)
         {
             return GetLocation(coords.x, coords.y);
         }
