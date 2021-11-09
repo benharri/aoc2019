@@ -29,7 +29,7 @@ public sealed class Day03 : Day
 
         foreach (var step in line.Split(','))
         {
-            var d = int.Parse(step.Substring(1));
+            var d = int.Parse(step[1..]);
             switch (step[0])
             {
                 case 'U':
