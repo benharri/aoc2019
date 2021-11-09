@@ -1,43 +1,39 @@
-using System.Collections.Generic;
-using System.Linq;
+namespace aoc2019;
 
-namespace aoc2019
+public sealed class Day01 : Day
 {
-    public sealed class Day01 : Day
+    private readonly IEnumerable<int> masses;
+
+    public Day01() : base(1, "The Tyranny of the Rocket Equation")
     {
-        private readonly IEnumerable<int> masses;
+        masses = Input.Select(int.Parse);
+    }
 
-        public Day01() : base(1, "The Tyranny of the Rocket Equation")
+    private static int FuelCost(int weight)
+    {
+        return weight / 3 - 2;
+    }
+
+    private static int FullCost(int cost)
+    {
+        int total = 0, newcost, tmp = cost;
+
+        while ((newcost = FuelCost(tmp)) >= 0)
         {
-            masses = Input.Select(int.Parse);
+            total += newcost;
+            tmp = newcost;
         }
 
-        private static int FuelCost(int weight)
-        {
-            return weight / 3 - 2;
-        }
+        return total;
+    }
 
-        private static int FullCost(int cost)
-        {
-            int total = 0, newcost, tmp = cost;
+    public override string Part1()
+    {
+        return $"{masses.Sum(FuelCost)}";
+    }
 
-            while ((newcost = FuelCost(tmp)) >= 0)
-            {
-                total += newcost;
-                tmp = newcost;
-            }
-
-            return total;
-        }
-
-        public override string Part1()
-        {
-            return $"{masses.Sum(FuelCost)}";
-        }
-
-        public override string Part2()
-        {
-            return $"{masses.Sum(FullCost)}";
-        }
+    public override string Part2()
+    {
+        return $"{masses.Sum(FullCost)}";
     }
 }

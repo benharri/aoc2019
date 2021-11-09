@@ -4,7 +4,7 @@ name: run
 
 steps:
   - name: run
-    image: mcr.microsoft.com/dotnet/sdk:latest
+    image: mcr.microsoft.com/dotnet/sdk:6.0
     commands:
       - dotnet test
       - dotnet run --project aoc2019/aoc2019.csproj

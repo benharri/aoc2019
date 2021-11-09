@@ -1,29 +1,25 @@
-using System.Linq;
-using aoc2019.lib;
+namespace aoc2019;
 
-namespace aoc2019
+public sealed class Day09 : Day
 {
-    public sealed class Day09 : Day
+    private readonly IntCodeVM vm;
+
+    public Day09() : base(9, "Sensor Boost")
     {
-        private readonly IntCodeVM vm;
+        vm = new IntCodeVM(Input.First());
+    }
 
-        public Day09() : base(9, "Sensor Boost")
-        {
-            vm = new IntCodeVM(Input.First());
-        }
+    public override string Part1()
+    {
+        vm.Reset();
+        vm.Run(1);
+        return $"{vm.output.ToDelimitedString(",")}";
+    }
 
-        public override string Part1()
-        {
-            vm.Reset();
-            vm.Run(1);
-            return $"{vm.output.ToDelimitedString(",")}";
-        }
-
-        public override string Part2()
-        {
-            vm.Reset();
-            vm.Run(2);
-            return $"{vm.output.ToDelimitedString(",")}";
-        }
+    public override string Part2()
+    {
+        vm.Reset();
+        vm.Run(2);
+        return $"{vm.output.ToDelimitedString(",")}";
     }
 }
