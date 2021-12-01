@@ -2,21 +2,21 @@ namespace aoc2019;
 
 public sealed class Day07 : Day
 {
-    private readonly IntCodeVM[] Amplifiers = new IntCodeVM[5];
+    private readonly IntCodeVM[] amplifiers = new IntCodeVM[5];
 
     public Day07() : base(7, "Amplification Circuit")
     {
-        for (var i = 0; i < 5; i++) Amplifiers[i] = new IntCodeVM(Input.First());
+        for (var i = 0; i < 5; i++) amplifiers[i] = new IntCodeVM(Input.First());
     }
 
     public override string Part1()
     {
-        long i, largest = 0;
+        var largest = 0L;
 
         foreach (var phaseSeq in Enumerable.Range(0, 5).Permute())
         {
-            i = 0;
-            foreach (var (vm, phase) in Amplifiers.Zip(phaseSeq))
+            var i = 0L;
+            foreach (var (vm, phase) in amplifiers.Zip(phaseSeq))
             {
                 vm.Reset();
                 vm.Run(phase, i);
@@ -32,18 +32,18 @@ public sealed class Day07 : Day
 
     public override string Part2()
     {
-        long i, largest = 0;
+        var largest = 0L;
 
         foreach (var phaseSeq in Enumerable.Range(5, 5).Permute())
         {
-            i = 0;
-            foreach (var (vm, phase) in Amplifiers.Zip(phaseSeq))
+            var i = 0L;
+            foreach (var (vm, phase) in amplifiers.Zip(phaseSeq))
             {
                 vm.Reset();
                 vm.AddInput(phase);
             }
 
-            var vms = new Queue<IntCodeVM>(Amplifiers);
+            var vms = new Queue<IntCodeVM>(amplifiers);
             while (vms.Count > 0)
             {
                 var vm = vms.Dequeue();

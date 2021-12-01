@@ -1,14 +1,9 @@
 ﻿using System.Reflection;
+using aoc2019;
 
-namespace aoc2019;
-
-internal static class Program
-{
-    private static void Main(string[] args)
-    {
-        var days =
-            Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.BaseType == typeof(Day))
+var days =
+    Assembly.GetExecutingAssembly().GetTypes()
+        .Where(t => t.BaseType == typeof(Day))
                 .Select(t => Activator.CreateInstance(t) as Day)
                 .OrderBy(d => d?.DayNumber);
 
@@ -22,8 +17,6 @@ internal static class Program
                 Console.WriteLine($"{dayNum} invalid or not yet implemented");
         }
         else
-        {
-            foreach (var d in days) d?.AllParts();
-        }
-    }
+{
+    foreach (var d in days) d?.AllParts();
 }

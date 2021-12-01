@@ -13,13 +13,13 @@ public sealed class Day09 : Day
     {
         vm.Reset();
         vm.Run(1);
-        return $"{vm.output.ToDelimitedString(",")}";
+        return $"{vm.Output.ToDelimitedString(",")}";
     }
 
     public override string Part2()
     {
         vm.Reset();
         vm.Run(2);
-        return $"{vm.output.ToDelimitedString(",")}";
+        return $"{vm.Output.ToDelimitedString(",")}";
     }
 }

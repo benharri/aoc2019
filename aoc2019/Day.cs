@@ -16,7 +16,7 @@ public abstract class Day
     protected virtual IEnumerable<string> Input =>
         File.ReadLines(FileName);
 
-    protected string FileName =>
+    public string FileName =>
         Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"input/day{DayNumber,2:00}.in");
 
     public void AllParts(bool verbose = true)

@@ -51,13 +51,13 @@ public sealed class Day13 : Day
     {
         vm.Reset();
         vm.Run();
-        return $"{vm.output.Where((v, i) => (i + 1) % 3 == 0 && v == 2).Count()}";
+        return $"{vm.Output.Where((v, i) => (i + 1) % 3 == 0 && v == 2).Count()}";
     }
 
     public override string Part2()
     {
         vm.Reset();
-        vm.memory[0] = 2;
+        vm.Memory[0] = 2;
         var printBoard = false;
         var gameTicks = 0;
         if (printBoard) Console.Clear();
@@ -66,7 +66,7 @@ public sealed class Day13 : Day
         while (haltType == IntCodeVM.HaltType.Waiting)
         {
             haltType = vm.Run();
-            UpdateTiles(vm.output);
+            UpdateTiles(vm.Output);
 
             var (ball, _) = board.First(t => t.Value == 4).Key;
             var (paddle, _) = board.First(t => t.Value == 3).Key;

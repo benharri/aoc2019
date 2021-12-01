@@ -9,7 +9,7 @@ public sealed class Day23 : Day
     public override string Part1()
     {
         var vms = Enumerable.Range(0, 50)
-            .Select((s, i) =>
+            .Select((_, i) =>
             {
                 var vm = new IntCodeVM(Input.First());
                 vm.Run(i);
@@ -19,7 +19,7 @@ public sealed class Day23 : Day
         while (true)
             foreach (var vm in vms)
             {
-                while (vm.output.Count > 0)
+                while (vm.Output.Any())
                 {
                     var destination = (int)vm.Result;
                     var x = vm.Result;
@@ -37,7 +37,7 @@ public sealed class Day23 : Day
     public override string Part2()
     {
         var vms = Enumerable.Range(0, 50)
-            .Select((s, i) =>
+            .Select((_, i) =>
             {
                 var vm = new IntCodeVM(Input.First());
                 vm.Run(i);
@@ -52,7 +52,7 @@ public sealed class Day23 : Day
             foreach (var vm in vms)
             {
                 var isIdle = true;
-                while (vm.output.Count > 0)
+                while (vm.Output.Any())
                 {
                     var destination = (int)vm.Result;
                     var x = vm.Result;

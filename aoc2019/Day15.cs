@@ -49,7 +49,7 @@ public sealed class Day15 : Day
                     currentLocation = vm.Result switch
                     {
                         Location.Empty or Location.System => Location.GetLocation(currentLocation.Neighbor(direction)),
-                        _ => throw new Exception($"Unknown or unexpected response for previous room: {vm.Result}"),
+                        _ => throw new Exception($"Unknown or unexpected response for previous room: {vm.Result}")
                     };
                 }
                 else

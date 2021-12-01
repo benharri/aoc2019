@@ -8,10 +8,12 @@ public class IntCodeVM
         Waiting
     }
 
+    private readonly Queue<long> input;
+    public readonly Queue<long> Output;
+
     private readonly long[] program;
     private long i;
-    public Queue<long> input, output;
-    public long[] memory;
+    public long[] Memory;
     private long relativeBase;
 
     public IntCodeVM(string tape)
@@ -19,20 +21,20 @@ public class IntCodeVM
         i = 0;
         relativeBase = 0;
         program = tape.Split(',').Select(long.Parse).ToArray();
-        memory = program;
+        Memory = program;
         input = new Queue<long>();
-        output = new Queue<long>();
+        Output = new Queue<long>();
     }
 
-    public long Result => output.Dequeue();
+    public long Result => Output.Dequeue();
 
     public void Reset()
     {
         i = 0;
         relativeBase = 0;
-        memory = program;
+        Memory = program;
         input.Clear();
-        output.Clear();
+        Output.Clear();
     }
 
     public void AddInput(params long[] values)
@@ -47,15 +49,15 @@ public class IntCodeVM
 
     private long MemGet(long addr)
     {
-        return addr < memory.Length ? memory[addr] : 0;
+        return addr < Memory.Length ? Memory[addr] : 0;
     }
 
     private void MemSet(long addr, long value)
     {
         if (addr < 0) addr = 0;
-        if (addr >= memory.Length)
-            Array.Resize(ref memory, (int)addr + 1);
-        memory[addr] = value;
+        if (addr >= Memory.Length)
+            Array.Resize(ref Memory, (int)addr + 1);
+        Memory[addr] = value;
     }
 
     private long Mode(long idx)
@@ -74,7 +76,7 @@ public class IntCodeVM
             0 => MemGet(param),
             1 => param,
             2 => MemGet(relativeBase + param),
-            _ => throw new Exception("invalid parameter mode"),
+            _ => throw new Exception("invalid parameter mode")
         };
     }
 
@@ -102,7 +104,7 @@ public class IntCodeVM
 
     public HaltType Run()
     {
-        while (i < memory.Length)
+        while (i < Memory.Length)
         {
             var op = MemGet(i) % 100;
             switch (op)
@@ -122,7 +124,7 @@ public class IntCodeVM
                     i += 2;
                     break;
                 case 4:
-                    output.Enqueue(Get(1));
+                    Output.Enqueue(Get(1));
                     i += 2;
                     break;
                 case 5:
