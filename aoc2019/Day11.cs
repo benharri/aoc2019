@@ -8,7 +8,7 @@ public sealed class Day11 : Day
 
     public Day11() : base(11, "Space Police")
     {
-        vm = new IntCodeVM(Input.First());
+        vm = new(Input.First());
     }
 
     private void Move()
@@ -34,21 +34,14 @@ public sealed class Day11 : Day
 
     private void Turn(long direction)
     {
-        switch (heading)
+        heading = heading switch
         {
-            case Direction.Up:
-                heading = direction == 0 ? Direction.Left : Direction.Right;
-                break;
-            case Direction.Down:
-                heading = direction == 0 ? Direction.Right : Direction.Left;
-                break;
-            case Direction.Left:
-                heading = direction == 0 ? Direction.Down : Direction.Up;
-                break;
-            case Direction.Right:
-                heading = direction == 0 ? Direction.Up : Direction.Down;
-                break;
-        }
+            Direction.Up    => direction == 0 ? Direction.Left : Direction.Right,
+            Direction.Down  => direction == 0 ? Direction.Right : Direction.Left,
+            Direction.Left  => direction == 0 ? Direction.Down : Direction.Up,
+            Direction.Right => direction == 0 ? Direction.Up : Direction.Down,
+            _ => heading
+        };
 
         Move();
     }
@@ -73,10 +66,7 @@ public sealed class Day11 : Day
         return map;
     }
 
-    public override string Part1()
-    {
-        return $"{PaintShip(0).Count}";
-    }
+    public override string Part1() => $"{PaintShip(0).Count}";
 
     public override string Part2()
     {

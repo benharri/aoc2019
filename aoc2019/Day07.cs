@@ -6,7 +6,7 @@ public sealed class Day07 : Day
 
     public Day07() : base(7, "Amplification Circuit")
     {
-        for (var i = 0; i < 5; i++) amplifiers[i] = new IntCodeVM(Input.First());
+        for (var i = 0; i < 5; i++) amplifiers[i] = new(Input.First());
     }
 
     public override string Part1()

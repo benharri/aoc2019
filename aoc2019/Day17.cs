@@ -6,7 +6,7 @@ public sealed class Day17 : Day
 
     public Day17() : base(17, "Set and Forget")
     {
-        vm = new IntCodeVM(Input.First());
+        vm = new(Input.First());
     }
 
     public override string Part1()

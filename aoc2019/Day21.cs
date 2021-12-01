@@ -6,7 +6,7 @@ public sealed class Day21 : Day
 
     public Day21() : base(21, "Springdroid Adventure")
     {
-        vm = new IntCodeVM(Input.First());
+        vm = new(Input.First());
     }
 
     public override string Part1()

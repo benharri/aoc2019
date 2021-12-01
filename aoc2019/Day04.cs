@@ -2,9 +2,7 @@
 
 public sealed class Day04 : Day
 {
-    private readonly int end;
-
-    private readonly int start;
+    private readonly int start, end;
 
     public Day04() : base(4, "Secure Container")
     {
@@ -17,9 +15,8 @@ public sealed class Day04 : Day
     {
         var prev = 0;
         var hasDup = false;
-        foreach (var c in i.ToString())
+        foreach (var curr in i.ToString().Select(c => c - '0'))
         {
-            var curr = c - '0';
             if (curr < prev) return false;
             if (curr == prev) hasDup = true;
             prev = curr;
@@ -34,13 +31,9 @@ public sealed class Day04 : Day
         return IsValid(i) && s.Select(c => s.Count(j => j == c)).Any(c => c == 2);
     }
 
-    public override string Part1()
-    {
-        return $"{Enumerable.Range(start, end).Count(IsValid)}";
-    }
+    public override string Part1() =>
+        $"{Enumerable.Range(start, end).Count(IsValid)}";
 
-    public override string Part2()
-    {
-        return $"{Enumerable.Range(start, end).Count(HasOnePair)}";
-    }
+    public override string Part2() => 
+        $"{Enumerable.Range(start, end).Count(HasOnePair)}";
 }

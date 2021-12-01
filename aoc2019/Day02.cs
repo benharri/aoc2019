@@ -9,7 +9,7 @@ public sealed class Day02 : Day
         input = Input.First().Split(',').Select(int.Parse);
     }
 
-    public int RunIntCode(int noun, int verb)
+    private int RunIntCode(int noun, int verb)
     {
         var v = input.ToList();
         v[1] = noun;
@@ -19,7 +19,8 @@ public sealed class Day02 : Day
             v[v[i + 3]] = v[i] switch
             {
                 1 => v[v[i + 1]] + v[v[i + 2]],
-                2 => v[v[i + 1]] * v[v[i + 2]]
+                2 => v[v[i + 1]] * v[v[i + 2]],
+                _ => throw new ArgumentOutOfRangeException(nameof(verb))
             };
 
         return v[0];

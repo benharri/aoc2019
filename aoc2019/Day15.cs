@@ -7,7 +7,7 @@ public sealed class Day15 : Day
 
     public Day15() : base(15, "Oxygen System")
     {
-        vm = new IntCodeVM(Input.First());
+        vm = new(Input.First());
     }
 
     public override string Part1()
@@ -30,13 +30,13 @@ public sealed class Day15 : Day
                             _ = new Location(x, y, Location.Opposites[direction], Location.Wall);
                             break;
                         case Location.Empty:
-                            currentLocation = new Location(x, y, Location.Opposites[direction]);
+                            currentLocation = new(x, y, Location.Opposites[direction]);
                             break;
                         case Location.System:
-                            currentLocation = new Location(x, y, Location.Opposites[direction], Location.System);
+                            currentLocation = new(x, y, Location.Opposites[direction], Location.System);
                             break;
                         default:
-                            throw new Exception($"Unknown IntCodeVM response: {vm.Result}");
+                            throw new($"Unknown IntCodeVM response: {vm.Result}");
                     }
                 }
             }
@@ -49,7 +49,7 @@ public sealed class Day15 : Day
                     currentLocation = vm.Result switch
                     {
                         Location.Empty or Location.System => Location.GetLocation(currentLocation.Neighbor(direction)),
-                        _ => throw new Exception($"Unknown or unexpected response for previous room: {vm.Result}")
+                        _ => throw new($"Unknown or unexpected response for previous room: {vm.Result}")
                     };
                 }
                 else

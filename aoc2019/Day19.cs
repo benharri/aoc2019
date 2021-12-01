@@ -7,7 +7,7 @@ public sealed class Day19 : Day
 
     public Day19() : base(19, "Tractor Beam")
     {
-        vm = new IntCodeVM(Input.First());
+        vm = new(Input.First());
         grid = new long[50, 50];
     }
 

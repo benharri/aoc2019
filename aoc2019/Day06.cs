@@ -18,10 +18,8 @@ public sealed class Day06 : Day
         return res;
     }
 
-    public override string Part1()
-    {
-        return $"{input.Keys.Sum(o => GetParents(o).Count - 1)}";
-    }
+    public override string Part1() =>
+        $"{input.Keys.Sum(o => GetParents(o).Count - 1)}";
 
     public override string Part2()
     {

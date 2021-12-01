@@ -3,7 +3,6 @@
 public sealed class Day05 : Day
 {
     private readonly IEnumerable<int> tape;
-
     private int output;
 
     public Day05() : base(5, "Sunny with a Chance of Asteroids")
@@ -11,7 +10,7 @@ public sealed class Day05 : Day
         tape = Input.First().Split(',').Select(int.Parse);
     }
 
-    public void RunIntCode(List<int> v, int input)
+    private void RunIntCode(IList<int> v, int input)
     {
         var i = 0;
         while (i < v.Count && v[i] != 99)

@@ -19,7 +19,7 @@ public sealed class Day16 : Day
         for (var i = 0; i < phaseCount; i++)
             CalculateSignal(i % 2 == 0 ? signal0 : signal1, i % 2 == 0 ? signal1 : signal0);
 
-        return new string(
+        return new(
             signal0.Take(8).Select(c => (char)(c + '0'))
                 .ToArray());
     }
@@ -37,7 +37,7 @@ public sealed class Day16 : Day
                 signal[i] = (signal[i + 1] + signal[i]) % 10;
         }
 
-        return new string(signal.Take(8).Select(c => (char)(c + '0')).ToArray());
+        return new(signal.Take(8).Select(c => (char)(c + '0')).ToArray());
     }
 
     private static void CalculateSignal(IReadOnlyList<int> input, IList<int> output)

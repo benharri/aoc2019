@@ -25,24 +25,24 @@ public sealed class Day03 : Day
     private static Dictionary<(int, int), int> ParseWire(string line)
     {
         var r = new Dictionary<(int, int), int>();
-        int x = 0, y = 0, c = 0, i;
+        int x = 0, y = 0, c = 0;
 
         foreach (var step in line.Split(','))
         {
-            var d = int.Parse(step[1..]);
+            int i = 0, d = int.Parse(step[1..]);
             switch (step[0])
             {
                 case 'U':
-                    for (i = 0; i < d; i++) r.TryAdd((x, ++y), c++);
+                    for (; i < d; i++) r.TryAdd((x, ++y), c++);
                     break;
                 case 'D':
-                    for (i = 0; i < d; i++) r.TryAdd((x, --y), c++);
+                    for (; i < d; i++) r.TryAdd((x, --y), c++);
                     break;
                 case 'R':
-                    for (i = 0; i < d; i++) r.TryAdd((++x, y), c++);
+                    for (; i < d; i++) r.TryAdd((++x, y), c++);
                     break;
                 case 'L':
-                    for (i = 0; i < d; i++) r.TryAdd((--x, y), c++);
+                    for (; i < d; i++) r.TryAdd((--x, y), c++);
                     break;
             }
         }

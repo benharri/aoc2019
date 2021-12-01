@@ -6,7 +6,7 @@ public sealed class Day09 : Day
 
     public Day09() : base(9, "Sensor Boost")
     {
-        vm = new IntCodeVM(Input.First());
+        vm = new(Input.First());
     }
 
     public override string Part1()

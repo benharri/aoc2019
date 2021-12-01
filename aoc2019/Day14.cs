@@ -10,7 +10,7 @@ public sealed class Day14 : Day
     {
         reactions = Input
             .Select(Reaction.Parse)
-            .ToDictionary(r => r.product.Name);
+            .ToDictionary(r => r.Product.Name);
         
         available = new();
     }
@@ -36,19 +36,18 @@ public sealed class Day14 : Day
             return false;
 
         var reaction = reactions[chem];
-        var reactionCount = (long)Math.Ceiling((double)quantity / reaction.product.Quantity);
+        var reactionCount = (long)Math.Ceiling((double)quantity / reaction.Product.Quantity);
 
-        foreach (var reactant in reaction.reactants)
-            if (!Consume(reactant.Name, reactionCount * reactant.Quantity))
-                return false;
+        if (reaction.Reactants.Any(reactant => !Consume(reactant.Name, reactionCount * reactant.Quantity)))
+            return false;
 
-        available[chem] = available.GetValueOrDefault(chem) + reactionCount * reaction.product.Quantity;
+        available[chem] = available.GetValueOrDefault(chem) + reactionCount * reaction.Product.Quantity;
         return true;
     }
 
     public override string Part1()
     {
-        available = new Dictionary<string, long> { { "ORE", long.MaxValue } };
+        available = new() { { "ORE", long.MaxValue } };
         Consume("FUEL", 1);
         return $"{long.MaxValue - available["ORE"]}";
     }
@@ -56,7 +55,7 @@ public sealed class Day14 : Day
     public override string Part2()
     {
         const long capacity = 1_000_000_000_000;
-        available = new Dictionary<string, long> { { "ORE", capacity } };
+        available = new() { { "ORE", capacity } };
         Consume("FUEL", 1);
 
         var oreConsumed = capacity - available["ORE"];
@@ -69,26 +68,26 @@ public sealed class Day14 : Day
 
     private struct Component
     {
-        public string Name { get; set; }
-        public int Quantity { get; set; }
+        public string Name { get; init; }
+        public int Quantity { get; init; }
     }
 
     private class Reaction
     {
-        public readonly Component product;
-        public readonly Component[] reactants;
+        public readonly Component Product;
+        public readonly Component[] Reactants;
 
         private Reaction(Component[] reactants, Component product)
         {
-            this.reactants = reactants;
-            this.product = product;
+            Reactants = reactants;
+            Product = product;
         }
 
         public static Reaction Parse(string s)
         {
             var ss = s.Split(new[] { ", ", " => " }, StringSplitOptions.None);
 
-            return new Reaction(
+            return new(
                 ss.Take(ss.Length - 1).Select(ParseComponent).ToArray(),
                 ParseComponent(ss[^1])
             );
@@ -96,7 +95,7 @@ public sealed class Day14 : Day
             static Component ParseComponent(string s)
             {
                 var spl = s.Split(' ', 2);
-                return new Component
+                return new()
                 {
                     Quantity = int.Parse(spl[0]),
                     Name = spl[1]

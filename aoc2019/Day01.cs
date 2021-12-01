@@ -16,12 +16,12 @@ public sealed class Day01 : Day
 
     private static int FullCost(int cost)
     {
-        int total = 0, newcost, tmp = cost;
+        int total = 0, newCost, tmp = cost;
 
-        while ((newcost = FuelCost(tmp)) >= 0)
+        while ((newCost = FuelCost(tmp)) >= 0)
         {
-            total += newcost;
-            tmp = newcost;
+            total += newCost;
+            tmp = newCost;
         }
 
         return total;

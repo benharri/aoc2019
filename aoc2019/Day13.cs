@@ -3,12 +3,11 @@ namespace aoc2019;
 public sealed class Day13 : Day
 {
     private readonly Dictionary<(int x, int y), int> board;
-
     private readonly IntCodeVM vm;
 
     public Day13() : base(13, "Care Package")
     {
-        vm = new IntCodeVM(Input.First());
+        vm = new(Input.First());
         board = new Dictionary<(int, int), int>();
     }
 

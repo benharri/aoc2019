@@ -22,8 +22,8 @@ public class IntCodeVM
         relativeBase = 0;
         program = tape.Split(',').Select(long.Parse).ToArray();
         Memory = program;
-        input = new Queue<long>();
-        Output = new Queue<long>();
+        input = new();
+        Output = new();
     }
 
     public long Result => Output.Dequeue();
@@ -76,7 +76,7 @@ public class IntCodeVM
             0 => MemGet(param),
             1 => param,
             2 => MemGet(relativeBase + param),
-            _ => throw new Exception("invalid parameter mode")
+            _ => throw new("invalid parameter mode")
         };
     }
 
@@ -88,11 +88,11 @@ public class IntCodeVM
             case 0:
                 MemSet(param, val);
                 break;
-            case 1: throw new Exception("cannot set in immediate mode");
+            case 1: throw new("cannot set in immediate mode");
             case 2:
                 MemSet(relativeBase + param, val);
                 break;
-            default: throw new Exception("invalid parameter mode");
+            default: throw new("invalid parameter mode");
         }
     }
 
@@ -148,7 +148,7 @@ public class IntCodeVM
                 case 99:
                     return HaltType.Terminate;
                 default:
-                    throw new Exception($"unknown op {op} at {i}");
+                    throw new($"unknown op {op} at {i}");
             }
         }
 
