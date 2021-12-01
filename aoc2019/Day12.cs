@@ -22,19 +22,6 @@ public sealed class Day12 : Day
             moon.SetSiblings(moons);
     }
 
-    private static long Lcm(long a, long b) => a * b / Gcd(a, b);
-
-    private static long Gcd(long a, long b)
-    {
-        while (true)
-        {
-            if (b == 0) return a;
-            var a1 = a;
-            a = b;
-            b = a1 % b;
-        }
-    }
-
     private void Step()
     {
         foreach (var moon in moons)
@@ -66,7 +53,7 @@ public sealed class Day12 : Day
             if (cycleZ == 0 && moons.All(m => m.Dz == 0)) cycleZ = step * 2;
         }
 
-        return $"{Lcm(cycleX, Lcm(cycleY, cycleZ))}";
+        return $"{Util.Lcm(cycleX, Util.Lcm(cycleY, cycleZ))}";
     }
 
     public class Position
